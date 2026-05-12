@@ -1,8 +1,8 @@
-# qu-ai-wei v0.7.0 — CCL 批量查询词表
+# qu-ai-wei — CCL 批量查询词表
 # 上传到 https://corpus.pku.edu.cn/batch,逐条查 CCL 真实语料里的频率与上下文
 #
 # 这是「校准词表」,不是 snapshot 测试 fixture —— scripts/build-flat.sh 不会把它打进
-# .cursorrules / WARP.md;放在 tests/fixtures/ 仅因审计数据集中管理,不会被测试运行器消费
+# .cursorrules / WARP.md;放在 tests/fixtures/ 是方便集中审计,不会被测试运行器消费
 #
 # 解读阈值(给后续维护者一份固定刻度,避免人工估值):
 #   - 命中 0–5 例 → 强 AI 腔证据,patterns.md 对应规则旁标「单次即触发」,见 #47b 范式
@@ -35,7 +35,7 @@
 #   - corpus-queries-batch-5-platform.txt             77 条 (#37 + #50)
 #   - corpus-queries-batch-6-popwords-whitelist.txt   89 条 (#49 + 白名单控制)
 #
-# 派生文件由本表机械重建:
+# 派生文件由本表重新生成:
 #   grep -vE '^#|^$' corpus-queries.txt | sed -E 's/[[:space:]]+#.*$//; s/[[:space:]]+$//' > corpus-queries-clean.txt
 #
 # 校准建议(每年一次,或每次 patterns.md 大改后):
@@ -245,6 +245,8 @@
 # ===========================================
 # B+. 逻辑连接(规则 #34)
 # ===========================================
+# 真人(尤其学术 / 论说)也用这几个词;触发条件是「短段 ≥3 个 + 内容空转」,
+# 不是「出现即 AI 腔」。CCL 高频是预期结果,看的是上下文集中度与密度
 
 综上所述
 由此可见
