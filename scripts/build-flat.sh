@@ -19,8 +19,11 @@ BRAND="$DIR/references/brand-voice.md"
 MODELS="$DIR/references/reference-models.md"
 EXAMPLES="$DIR/references/examples.md"
 SOURCES="$DIR/references/sources.md"
+WHITELISTS="$DIR/references/whitelists.md"
+PUNCTUATION="$DIR/references/punctuation.md"
+SYNTAX="$DIR/references/syntax.md"
 
-for f in "$SKILL" "$PATTERNS" "$BRAND" "$MODELS" "$EXAMPLES" "$SOURCES"; do
+for f in "$SKILL" "$PATTERNS" "$BRAND" "$MODELS" "$EXAMPLES" "$SOURCES" "$WHITELISTS" "$PUNCTUATION" "$SYNTAX"; do
   [ -f "$f" ] || { echo "错误:找不到 $f"; exit 1; }
 done
 
@@ -70,6 +73,24 @@ awk '
   echo "---"
   echo ""
   strip_preamble "$PATTERNS"
+  echo ""
+  echo "---"
+  echo ""
+  echo "## 白名单(完整)"
+  echo ""
+  strip_preamble "$WHITELISTS"
+  echo ""
+  echo "---"
+  echo ""
+  echo "## 标点符号 · 第二层规范(完整)"
+  echo ""
+  strip_preamble "$PUNCTUATION"
+  echo ""
+  echo "---"
+  echo ""
+  echo "## 语序 · 英文句法残留(完整)"
+  echo ""
+  strip_preamble "$SYNTAX"
   echo ""
   echo "---"
   echo ""
