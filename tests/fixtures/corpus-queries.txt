@@ -20,7 +20,23 @@
 #   - 编码 UTF-8 (无 BOM),行尾 LF
 #   - 一行一条查询,空行与 `#` 开头为注释
 #   - 已去重;分组对应 patterns.md 编号
-#   - 批量接口若拒绝注释:grep -vE '^#|^$' tests/fixtures/corpus-queries.txt > clean.txt
+#
+# CCL 上传约束(实测 2026-05):
+#   - 每次上传最多 100 行
+#   - 上传器不识别 `#` 注释,会把注释当字面查询
+#
+# 已为上传准备的派生文件(本目录):
+#   - corpus-queries-clean.txt           全部 441 条,去注释 / 去空行 / 去行尾注释
+#   - corpus-queries-batch-1-content.txt              54 条 (规则 #1-#6)
+#   - corpus-queries-batch-2a-language-hf.txt         43 条 (#7 高频词单词 + 共现)
+#   - corpus-queries-batch-2b-language-rest.txt       62 条 (#8, #11-#20)
+#   - corpus-queries-batch-3-rhetoric-dialogue.txt    55 条 (#34, #21-#22a, #26-#29, #51)
+#   - corpus-queries-batch-4-fillers-translation.txt  61 条 (#30-#33, #39-#42)
+#   - corpus-queries-batch-5-platform.txt             77 条 (#37 + #50)
+#   - corpus-queries-batch-6-popwords-whitelist.txt   89 条 (#49 + 白名单控制)
+#
+# 派生文件由本表机械重建:
+#   grep -vE '^#|^$' corpus-queries.txt | sed -E 's/[[:space:]]+#.*$//; s/[[:space:]]+$//' > corpus-queries-clean.txt
 #
 # 校准建议(每年一次,或每次 patterns.md 大改后):
 #   - 「已入土」流行词按《咬文嚼字》年度榜更新
