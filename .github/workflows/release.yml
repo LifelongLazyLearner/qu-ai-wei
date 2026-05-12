@@ -1,0 +1,152 @@
+name: Tag and release on version bump
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*.*.*']
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: 'Commit SHA to tag (back-fill). Required together with tag.'
+        required: false
+      tag:
+        description: 'Tag in vX.Y.Z form (back-fill). Required together with sha.'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Resolve tag and target SHA
+        id: resolve
+        env:
+          IN_SHA: ${{ inputs.sha }}
+          IN_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          mode=skip
+          tag=
+          sha=
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${IN_SHA}${IN_TAG}" ]; then
+            if [ -z "$IN_SHA" ] || [ -z "$IN_TAG" ]; then
+              echo "::error::both sha and tag must be supplied together"; exit 1
+            fi
+            if ! [[ "$IN_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "::error::tag must look like vX.Y.Z"; exit 1
+            fi
+            tag="$IN_TAG"
+            sha="$IN_SHA"
+            mode=dispatch
+          elif [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            t="${GITHUB_REF#refs/tags/}"
+            if [[ "$t" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              tag="$t"
+              sha="$GITHUB_SHA"
+              mode=tag-push
+            else
+              echo "tag $t does not match vX.Y.Z; skipping"
+            fi
+          elif [[ "${GITHUB_REF}" == refs/heads/main ]]; then
+            subject="$(git log -1 --pretty=%s)"
+            if [[ "$subject" =~ ^v([0-9]+\.[0-9]+\.[0-9]+): ]]; then
+              tag="v${BASH_REMATCH[1]}"
+              sha="$GITHUB_SHA"
+              mode=main-push
+            else
+              echo "no vX.Y.Z: prefix on commit subject; skipping"
+            fi
+          fi
+
+          {
+            echo "mode=$mode"
+            echo "tag=$tag"
+            echo "sha=$sha"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Skip if release already exists
+        if: steps.resolve.outputs.mode != 'skip'
+        id: existing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "${{ steps.resolve.outputs.tag }}" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "release already exists for ${{ steps.resolve.outputs.tag }}; skipping"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Extract release notes and title from CHANGELOG.md
+        if: steps.resolve.outputs.mode != 'skip' && steps.existing.outputs.exists == 'false'
+        id: notes
+        run: |
+          set -euo pipefail
+          tag="${{ steps.resolve.outputs.tag }}"
+
+          header="$(awk -v t="$tag" '
+            BEGIN { gsub(/\./, "\\.", t) }
+            $0 ~ "^### "t"([^0-9.]|$)" {
+              sub(/^### /, "")
+              print
+              exit
+            }
+          ' CHANGELOG.md)"
+
+          if [ -z "$header" ]; then
+            echo "::error::no CHANGELOG.md heading found for $tag"; exit 1
+          fi
+
+          awk -v t="$tag" '
+            BEGIN { gsub(/\./, "\\.", t) }
+            $0 ~ "^### "t"([^0-9.]|$)" { in_section=1; next }
+            in_section && /^### v/ { exit }
+            in_section { print }
+          ' CHANGELOG.md > release-notes.md
+
+          if [ ! -s release-notes.md ]; then
+            echo "::error::no CHANGELOG.md body found for $tag"; exit 1
+          fi
+
+          if [[ "$header" == *" · "* ]]; then
+            summary="${header#* · }"
+            title="$tag — $summary"
+          else
+            title="$tag"
+          fi
+          echo "title=$title" >> "$GITHUB_OUTPUT"
+
+      - name: Create tag (if missing) and release
+        if: steps.resolve.outputs.mode != 'skip' && steps.existing.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          tag="${{ steps.resolve.outputs.tag }}"
+          sha="${{ steps.resolve.outputs.sha }}"
+
+          git fetch --tags --force origin 2>/dev/null || true
+          existing_sha="$(git rev-parse -q --verify "refs/tags/$tag^{commit}" 2>/dev/null || true)"
+
+          if [ -z "$existing_sha" ]; then
+            git tag "$tag" "$sha"
+            git push origin "refs/tags/$tag"
+          elif [ "$existing_sha" != "$sha" ]; then
+            echo "::error::tag $tag already points to $existing_sha but we want $sha — refusing to move the tag"
+            exit 1
+          fi
+
+          gh release create "$tag" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$sha" \
+            --title "${{ steps.notes.outputs.title }}" \
+            --notes-file release-notes.md
