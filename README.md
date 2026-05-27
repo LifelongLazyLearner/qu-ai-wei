@@ -11,7 +11,7 @@
 
 扫掉简体中文里 AI 写作的痕迹，让稿子读着像人写的。当前原生支持 8 个 agent：Cursor、Claude Code、OpenAI Codex CLI、OpenCode、Kiro、Factory Droid、Slate、Hermes。
 
-<video src="./demo.mp4" controls width="100%"></video>
+https://github.com/user-attachments/assets/24513c20-968d-437b-8ceb-1ac1f77f6ad6
 
 ---
 
