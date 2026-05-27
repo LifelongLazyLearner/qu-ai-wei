@@ -1,11 +1,11 @@
 # 去 AI 味（qu-ai-wei）
 
-[![Version](https://img.shields.io/badge/version-0.7.0-blue.svg)](https://github.com/hzblacksmith/qu-ai-wei/releases)
+[![Version](https://img.shields.io/badge/version-0.7.0-blue.svg)](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![Language](https://img.shields.io/badge/lang-简体中文-red.svg)](#)
-[![GitHub stars](https://img.shields.io/github/stars/hzblacksmith/qu-ai-wei?style=social)](https://github.com/hzblacksmith/qu-ai-wei/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/LifelongLazyLearner/qu-ai-wei?style=social)](https://github.com/LifelongLazyLearner/qu-ai-wei/stargazers)
 
-> ⚠️ **0.x 开发版（当前 v0.7.0）:** qu-ai-wei 仍在迭代，规则、分类、API 都可能变动。欢迎提 [issue](https://github.com/hzblacksmith/qu-ai-wei/issues) / [discussion](https://github.com/hzblacksmith/qu-ai-wei/discussions) / PR 反馈。
+> ⚠️ **0.x 开发版（当前 v0.7.0）:** qu-ai-wei 仍在迭代，规则、分类、API 都可能变动。欢迎提 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues) / [discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) / PR 反馈。
 >
 > **只支持简体中文。** 繁體有自己的 AI 腔特征、用字偏好、排版规范，规则需要单独维护，留给后续版本。
 
@@ -79,7 +79,7 @@
 ### 一键安装（推荐）
 
 ```bash
-git clone https://github.com/hzblacksmith/qu-ai-wei.git ~/qu-ai-wei
+git clone https://github.com/LifelongLazyLearner/qu-ai-wei.git ~/qu-ai-wei
 cd ~/qu-ai-wei
 
 # 按平台安装（可重复执行）
@@ -138,7 +138,7 @@ bash ~/.claude/skills/qu-ai-wei/update.sh
 bash ~/.codex/skills/qu-ai-wei/update.sh
 ```
 
-`update.sh` 会打印 `旧版本 → 新版本` 和本版发布页链接,没有新版就提示「已是最新」。每版具体变化见 [Releases](https://github.com/hzblacksmith/qu-ai-wei/releases)。
+`update.sh` 会打印 `旧版本 → 新版本` 和本版发布页链接,没有新版就提示「已是最新」。每版具体变化见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)。
 
 ## 用法
 
