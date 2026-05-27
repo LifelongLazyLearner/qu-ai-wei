@@ -12,5 +12,5 @@ if [ "$before" = "$after" ]; then
   echo "qu-ai-wei $after — 已是最新"
 else
   echo "qu-ai-wei: $before → $after"
-  echo "本版变更：https://github.com/hzblacksmith/qu-ai-wei/releases/tag/$after"
+  echo "本版变更：https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/$after"
 fi
