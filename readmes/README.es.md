@@ -1,10 +1,12 @@
 # qu-ai-wei
 
-[简体中文](./README.md) | [English](./README.en.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | Español
+[简体中文](../README.md) | [English](./README.en.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | Español
 
 qu-ai-wei es un agent skill para reducir el tono de texto generado por IA en **chino simplificado**. Ayuda a convertir un borrador en chino simplificado que suena claramente a IA en un texto más limpio y natural, sin cambiar los hechos ni la intención original.
 
-La documentación canónica es el [README en chino simplificado](./README.md). Este archivo es solo una orientación breve para lectores en español.
+La documentación canónica es el [README en chino simplificado](../README.md). Este archivo es solo una orientación breve para lectores en español.
+
+https://github.com/user-attachments/assets/24513c20-968d-437b-8ceb-1ac1f77f6ad6
 
 ## Para Qué Sirve
 
@@ -59,12 +61,12 @@ Para usuarios que no hablan chino, la opción más segura es llamar el skill de 
 [pega aquí texto en chino simplificado]
 ```
 
-También puedes pegar el cuerpo de [SKILL.md](./SKILL.md) en las instrucciones personalizadas o el system prompt de un modelo de IA. Omite el YAML frontmatter del principio.
+También puedes pegar el cuerpo de [SKILL.md](../SKILL.md) en las instrucciones personalizadas o el system prompt de un modelo de IA. Omite el YAML frontmatter del principio.
 
 ## Más Información
 
-- Documentación completa: [README.md](./README.md)
-- Reglas del skill: [SKILL.md](./SKILL.md)
-- Referencias: [references/](./references/)
-- Cambios: [CHANGELOG.md](./CHANGELOG.md)
-- Licencia: [MIT](./LICENSE)
+- Documentación completa: [README.md](../README.md)
+- Reglas del skill: [SKILL.md](../SKILL.md)
+- Referencias: [references/](../references/)
+- Cambios: [CHANGELOG.md](../CHANGELOG.md)
+- Licencia: [MIT](../LICENSE)

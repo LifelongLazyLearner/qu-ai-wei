@@ -5,7 +5,7 @@
 [![Language](https://img.shields.io/badge/lang-简体中文-red.svg)](#)
 [![GitHub stars](https://img.shields.io/github/stars/LifelongLazyLearner/qu-ai-wei?style=social)](https://github.com/LifelongLazyLearner/qu-ai-wei/stargazers)
 
-语言: 简体中文 | [English](./README.en.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Español](./README.es.md)
+语言: 简体中文 | [English](./readmes/README.en.md) | [日本語](./readmes/README.ja.md) | [한국어](./readmes/README.ko.md) | [Español](./readmes/README.es.md)
 
 > ⚠️ **0.x 开发版（当前 v0.7.0）:** qu-ai-wei 仍在迭代，规则、分类、API 都可能变动。欢迎提 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues) / [discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) / PR 反馈。
 >

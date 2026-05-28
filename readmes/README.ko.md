@@ -1,10 +1,12 @@
 # qu-ai-wei
 
-[简体中文](./README.md) | [English](./README.en.md) | [日本語](./README.ja.md) | 한국어 | [Español](./README.es.md)
+[简体中文](../README.md) | [English](./README.en.md) | [日本語](./README.ja.md) | 한국어 | [Español](./README.es.md)
 
 qu-ai-wei는 **간체 중국어** 글에서 AI가 쓴 듯한 흔적을 줄이기 위한 agent skill입니다. 간체 중국어 초안의 사실과 의도를 유지하면서 더 자연스럽고 사람이 쓴 듯한 중국어로 다듬는 데 쓰입니다.
 
-정식 문서는 [간체 중국어 README](./README.md)입니다. 이 파일은 한국어 사용자를 위한 짧은 안내입니다.
+정식 문서는 [간체 중국어 README](../README.md)입니다. 이 파일은 한국어 사용자를 위한 짧은 안내입니다.
+
+https://github.com/user-attachments/assets/24513c20-968d-437b-8ceb-1ac1f77f6ad6
 
 ## 무엇을 위한 도구인가
 
@@ -59,12 +61,12 @@ bash scripts/install-skill.sh --platform all
 [여기에 간체 중국어 텍스트를 붙여넣기]
 ```
 
-[SKILL.md](./SKILL.md)의 본문을 AI 모델의 custom instructions 또는 system prompt에 붙여넣어 사용할 수도 있습니다. 맨 위의 YAML frontmatter는 제외하세요.
+[SKILL.md](../SKILL.md)의 본문을 AI 모델의 custom instructions 또는 system prompt에 붙여넣어 사용할 수도 있습니다. 맨 위의 YAML frontmatter는 제외하세요.
 
 ## 더 보기
 
-- 전체 문서: [README.md](./README.md)
-- Skill 규칙: [SKILL.md](./SKILL.md)
-- 참고 자료: [references/](./references/)
-- 변경 내역: [CHANGELOG.md](./CHANGELOG.md)
-- 라이선스: [MIT](./LICENSE)
+- 전체 문서: [README.md](../README.md)
+- Skill 규칙: [SKILL.md](../SKILL.md)
+- 참고 자료: [references/](../references/)
+- 변경 내역: [CHANGELOG.md](../CHANGELOG.md)
+- 라이선스: [MIT](../LICENSE)
