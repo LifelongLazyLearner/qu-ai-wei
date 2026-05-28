@@ -1,10 +1,12 @@
 # qu-ai-wei
 
-[简体中文](./README.md) | [English](./README.en.md) | 日本語 | [한국어](./README.ko.md) | [Español](./README.es.md)
+[简体中文](../README.md) | [English](./README.en.md) | 日本語 | [한국어](./README.ko.md) | [Español](./README.es.md)
 
 qu-ai-wei は、**簡体字中国語**の文章から AI っぽさを減らすための agent skill です。簡体字中国語の下書きを、事実と意図を保ったまま、より自然で人が書いたように読める文章へ整えます。
 
-正式なドキュメントは [簡体字中国語 README](./README.md) です。このファイルは、日本語話者向けの短い案内です。
+正式なドキュメントは [簡体字中国語 README](../README.md) です。このファイルは、日本語話者向けの短い案内です。
+
+https://github.com/user-attachments/assets/24513c20-968d-437b-8ceb-1ac1f77f6ad6
 
 ## 何のためのものか
 
@@ -59,12 +61,12 @@ bash scripts/install-skill.sh --platform all
 [ここに簡体字中国語の文章を貼り付ける]
 ```
 
-[SKILL.md](./SKILL.md) の本文を、AI モデルのカスタム指示やシステムプロンプトに貼り付けることもできます。先頭の YAML frontmatter は除いてください。
+[SKILL.md](../SKILL.md) の本文を、AI モデルのカスタム指示やシステムプロンプトに貼り付けることもできます。先頭の YAML frontmatter は除いてください。
 
 ## 関連リンク
 
-- 詳細ドキュメント: [README.md](./README.md)
-- Skill ルール: [SKILL.md](./SKILL.md)
-- 参考資料: [references/](./references/)
-- 変更履歴: [CHANGELOG.md](./CHANGELOG.md)
-- ライセンス: [MIT](./LICENSE)
+- 詳細ドキュメント: [README.md](../README.md)
+- Skill ルール: [SKILL.md](../SKILL.md)
+- 参考資料: [references/](../references/)
+- 変更履歴: [CHANGELOG.md](../CHANGELOG.md)
+- ライセンス: [MIT](../LICENSE)
