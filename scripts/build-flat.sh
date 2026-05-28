@@ -15,6 +15,7 @@ cd "$DIR"
 
 SKILL="$DIR/SKILL.md"
 PATTERNS="$DIR/references/patterns.md"
+PLATFORM_PATTERNS="$DIR/references/platform-patterns.md"
 BRAND="$DIR/references/brand-voice.md"
 MODELS="$DIR/references/reference-models.md"
 EXAMPLES="$DIR/references/examples.md"
@@ -23,7 +24,7 @@ WHITELISTS="$DIR/references/whitelists.md"
 PUNCTUATION="$DIR/references/punctuation.md"
 SYNTAX="$DIR/references/syntax.md"
 
-for f in "$SKILL" "$PATTERNS" "$BRAND" "$MODELS" "$EXAMPLES" "$SOURCES" "$WHITELISTS" "$PUNCTUATION" "$SYNTAX"; do
+for f in "$SKILL" "$PATTERNS" "$PLATFORM_PATTERNS" "$BRAND" "$MODELS" "$EXAMPLES" "$SOURCES" "$WHITELISTS" "$PUNCTUATION" "$SYNTAX"; do
   [ -f "$f" ] || { echo "错误:找不到 $f"; exit 1; }
 done
 
@@ -73,6 +74,10 @@ awk '
   echo "---"
   echo ""
   strip_preamble "$PATTERNS"
+  echo ""
+  echo "---"
+  echo ""
+  strip_preamble "$PLATFORM_PATTERNS"
   echo ""
   echo "---"
   echo ""

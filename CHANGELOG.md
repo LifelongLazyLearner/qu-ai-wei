@@ -4,6 +4,25 @@
 > 注：版本记录中的章节名以 [`SKILL.md`](./SKILL.md) 为准。
 
 
+### v0.7.1（2026-05-28） · 上下文减重,无行为改变
+
+51 条规则、冲突仲裁顺序、简体中文-only 范围、`【门检】`、`打磨报告`、#47b 硬证据口径均保留。本版只减小自动加载上下文并拆出 H 组长规则。
+
+**上下文减重:**
+
+- **`SKILL.md` 删除装饰性 emoji 与压缩长说明。** 根文件保留触发、冲突仲裁顺序、语体矩阵、规则索引和强制输出格式;只保留必要的语义 emoji 检测例子(`#24`、`#37` 等)。`SKILL.md` 从 5,390 words / 77,331 bytes 降到 4,833 words / 67,691 bytes。
+- **拆出 `references/platform-patterns.md`。** H 组平台 / 文体规则 #37/#38/#49/#50 从 `references/patterns.md` 拆出,覆盖自媒体 / 社交平台、文学 / 故事、网络流行语、B 站等高语境规则。`references/patterns.md` 保留 H 组索引和指针,避免读者以为 H 组缺失。
+- **`scripts/build-flat.sh` 同步更新。** flat build 在 `patterns.md` 后追加 `platform-patterns.md`,确保 `.cursorrules` / `WARP.md` 与 progressive-disclosure 版本一致。
+- **当前文档指针更新。** README、sources、tests 里当前维护指引改为 `patterns.md` + `platform-patterns.md`;历史版本记录保持历史口径。
+
+**验证:**
+
+- `bash scripts/build-flat.sh`
+- `bash tests/check-version-sync.sh`
+- `bash tests/check-snapshot-smoke.sh`
+- `git diff --check`
+
+
 ### v0.7.0（2026-05-12） · 文档结构重整,无行为改变
 
 51 条规则、9 种语体、6 条打磨动作、自检与打磨报告格式全部保留。SKILL.md 从 1259 行降到 1012 行(-20%),四块长内容抽到 references/。
