@@ -1,0 +1,134 @@
+# Real-run regression manifest.
+#
+# Format:
+# - Blank lines and lines starting with # are ignored.
+# - A fixture block starts with [NN].
+# - Assertions are key=value; the parser splits only on the first =.
+# - Regex keys use rg's default regex syntax.
+# - *_fixed keys use rg --fixed-strings.
+# - file defaults to <NN>-output.md.
+
+[01]
+require_anywhere=【门检】
+require_section=## 终稿
+require_section=## 打磨报告
+
+[02]
+require_anywhere=【门检】
+require_section=## 终稿
+require_section=## 打磨报告
+
+[03]
+require_anywhere=【门检】
+require_section=## 终稿
+require_section=## 打磨报告
+
+[04]
+require_anywhere=【门检】
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=否定对举
+require_anywhere_fixed=两周
+
+[05]
+require_anywhere_fixed=【门检】判断：真人文本（停手）
+note=真人样本只要求门检停手,不要求终稿。
+
+[06]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=(品牌广告|brand-voice)
+require_final_fixed=iPhone
+require_final_fixed=Nike
+
+[07]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=(学术|科技)
+require_final_fixed=latency
+require_final_fixed=进行
+require_final_fixed=然而
+forbid_final=(群里|哥们|@ 我|兄弟们)
+
+[08]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#37
+
+[09]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#37
+require_anywhere=#51
+
+[10]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#50
+
+[11]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#48
+require_anywhere=#10
+
+[12]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#45
+
+[13]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#47b
+require_anywhere=#37-B
+require_final_fixed=XX 路
+require_final=(请核对|待核|待确认)
+forbid_final_fixed=#吃货薯
+
+[14]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#37-B
+forbid_final_fixed=绝绝子
+forbid_final_fixed=气场两米八
+require_final=(卡其色|风衣)
+
+[15]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#37-B
+require_final_fixed=Ctrl+E
+require_final=快速填充
+require_final=数据透视表
+forbid_final=不是梦
+
+[16]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#37-B
+require_final=神经酰胺
+require_final_fixed=B5
+require_final=氨基酸
+require_final=皮肤屏障
+forbid_final_fixed=修护 CP
+
+[17]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#49
+forbid_final=房子是租的，但生活不是
+forbid_final=租房党闭眼入|学生党、租房党闭眼入
+require_final=暖光灯泡

@@ -1,6 +1,6 @@
 # tests/
 
-回归样本和轻量检查脚本。当前包含 17 条手工回归样本 + 2 个自动化同步检查。
+回归样本和轻量检查脚本。当前包含 17 条手工回归样本 + 3 个自动化同步检查。
 
 ## 目录
 
@@ -29,6 +29,8 @@
 
 - **`check-version-sync.sh`** — 自动检查 `README.md` / `CHANGELOG.md` / `SKILL.md` / `.cursorrules` / `WARP.md` 的版本号是否同步。
 - **`check-snapshot-smoke.sh`** — 轻量检查 `tests/after/` 里的快照结构是否完整,并对 v0.6.4 新增的 04 / 05、v0.6.5 新增的 06-12、v0.6.6 新增的 13-17 样本做关键断言。
+- **`eval-manifest.txt` + `check-runs.sh`** — 可复用的真实运行检查器。`tests/after/` 仍是人工 anchor output;未来真实模型输出放到 `tests/runs/<version>-<model>/`,再用同一份 manifest 校验。
+- **`runs/README.md`** — 真实模型输出的手工 capture 规范,包含必填 metadata header。
 
 ## 怎么复核
 
@@ -43,6 +45,9 @@ bash tests/check-version-sync.sh
 
 # 快照 smoke check
 bash tests/check-snapshot-smoke.sh
+
+# manifest-based run check(先验证现有 anchor output;真实运行输出同理)
+bash tests/check-runs.sh tests/after
 ```
 
 **判据:** baseline 和 after 在以下维度应当一致(允许文字措辞细微差异):
@@ -75,4 +80,4 @@ bash tests/check-snapshot-smoke.sh
 3. 终稿应尽量回落到原文已有的具体事实(两周 / 三次评审 / 没人拍板),不能继续堆「认知错位 / 底层逻辑」这类抽象桶词
 4. 真人样本应在门检直接停手,不能进入完整改写流程
 
-未来可以再加自动化(例如让 `build-flat.sh` 附带一个 `--eval` 模式调 API 跑这些样本)。目前保持最简单:人工样本 + 一个自动检查脚本。
+未来可以再加自动化(例如让 `build-flat.sh` 附带一个 `--eval` 模式调 API 跑这些样本)。目前保持最简单:人工 anchor output + manifest 检查器。真实模型输出请按 `tests/runs/README.md` 手工 capture,不要把 anchor output 冒充成 captured run。
