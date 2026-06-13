@@ -3,6 +3,11 @@
 > 历史版本已从 `README.md` 拆分到本文件（2026-04-23）。
 > 注：版本记录中的章节名以 [`SKILL.md`](./SKILL.md) 为准。
 
+### Unreleased
+
+- **新增离线 real-run 回归 harness。** `tests/eval-manifest.txt` 把 `tests/check-snapshot-smoke.sh` 里的语义断言整理成 line-oriented manifest;`tests/check-runs.sh <run-dir>` 可校验 `tests/after` anchor output,也可校验未来放在 `tests/runs/<version>-<model>/` 的真实 captured model outputs。
+- **新增 `tests/runs/README.md`。** 说明 captured runs 的手工采集流程和必填 metadata header,明确不要把人工 anchor output 冒充成真实模型输出。
+
 
 ### v0.7.1（2026-05-28） · 上下文减重,无行为改变
 
