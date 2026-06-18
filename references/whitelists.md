@@ -37,7 +37,7 @@
 |---|---|---|
 | **产品 / 协议 / 平台名** | `Claude Skills`、`Claude Code`、`MCP`、`Anthropic`、`Copilot`、`Cursor`、`Windsurf`、`ChatGPT`、`GPT-4`、`Gemini` | ❌ 克劳德技能 / 克劳德代码 / 模型上下文协议 |
 | **通用技术缩写** | `API`、`SDK`、`CLI`、`UI`、`UX`、`URL`、`IDE`、`PR`、`CI` / `CD`、`LLM`、`RAG`、`JSON`、`YAML`、`HTTP`、`SSH`、`IDE`、`GPU`、`TPU` | ❌ 应用程序接口(API) / 软件开发工具包(SDK) / 命令行界面(CLI) |
-| **互联网速记** | `TLDR`、`BTW`、`FYI`、`TBH`、`IMO`、`IMHO`、`AKA`、`ETA`、`EOD`、`ASAP` | ❌ 太长不看 / 顺便说一下 / 仅供参考 / 说实话 |
+| **互联网速记** | `TLDR`、`BTW`、`FYI`、`TBH`、`IMO`、`IMHO`、`AKA`、`ETA`、`EOD`、`ASAP` | ❌ 太长不看 / 顺便说一下 / 仅供参考 |
 | **文档 / 代码状态标记** | `TBD`、`N/A`、`WIP`、`TODO`、`FIXME`、`DEPRECATED`、`DRAFT`、`RFC` | ❌ 待定 / 不适用 / 进行中 / 待办 |
 
 **规则：** 以上四类在中文正文里**一律保留英文原形**。不翻译、不意译、不括注中文（`MCP（模型上下文协议）`也属 AI 腔 —— 看 #17）。
