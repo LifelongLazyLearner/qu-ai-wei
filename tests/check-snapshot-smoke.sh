@@ -41,7 +41,8 @@ for file in tests/after/01-output.md \
             tests/after/14-output.md \
             tests/after/15-output.md \
             tests/after/16-output.md \
-            tests/after/17-output.md; do
+            tests/after/17-output.md \
+            tests/after/18-output.md; do
   rg -q "【门检】" "$file" || {
     echo "$file 缺少门检行" >&2
     exit 1
@@ -338,6 +339,32 @@ if ! is_known_gap "17"; then
     echo "17-output.md 终稿未保留具体好物 暖光灯泡" >&2
     exit 1
   }
+fi
+
+# 18 — 假坦诚开场 #19b + 格言公式 #37 + 伪洞察枢纽 #19,且真诚 说实话 保护
+if ! is_known_gap "18"; then
+  rg -q "【门检】判断[:：]AI 生成文本" tests/after/18-output.md || {
+    echo "18-output.md 门检未判为 AI 生成文本" >&2
+    exit 1
+  }
+  rg -q "#19b" tests/after/18-output.md || {
+    echo "18-output.md 未命中 #19b 假坦诚开场" >&2
+    exit 1
+  }
+  rg -q "#37" tests/after/18-output.md || {
+    echo "18-output.md 未命中 #37 格言公式" >&2
+    exit 1
+  }
+  # 终稿必须保留接不确定反应的真诚 说实话(毛边,别误杀)
+  extract_zhonggao tests/after/18-output.md | rg -q "说实话" || {
+    echo "18-output.md 终稿未保留接不确定反应的真诚 说实话（#19b 不触发毛边）" >&2
+    exit 1
+  }
+  # 终稿必须清掉格言公式
+  if extract_zhonggao tests/after/18-output.md | rg -q "是成年人最大的底气|是当代人最稀缺的能力"; then
+    echo "18-output.md 终稿仍含格言公式" >&2
+    exit 1
+  fi
 fi
 
 echo "snapshot smoke ok"

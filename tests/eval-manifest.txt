@@ -132,3 +132,13 @@ require_anywhere=#49
 forbid_final=房子是租的，但生活不是
 forbid_final=租房党闭眼入|学生党、租房党闭眼入
 require_final=暖光灯泡
+
+[18]
+require_anywhere=【门检】判断[:：]AI 生成文本
+require_section=## 终稿
+require_section=## 打磨报告
+require_anywhere=#19b
+require_anywhere=#37
+require_final=说实话
+forbid_final=是成年人最大的底气
+forbid_final=是当代人最稀缺的能力
