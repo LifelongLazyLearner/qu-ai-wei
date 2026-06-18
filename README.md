@@ -1,13 +1,13 @@
 # 去 AI 味（qu-ai-wei）
 
-[![Version](https://img.shields.io/badge/version-0.7.1-blue.svg)](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)
+[![Version](https://img.shields.io/badge/version-0.8.0-blue.svg)](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![Language](https://img.shields.io/badge/lang-简体中文-red.svg)](#)
 [![GitHub stars](https://img.shields.io/github/stars/LifelongLazyLearner/qu-ai-wei?style=social)](https://github.com/LifelongLazyLearner/qu-ai-wei/stargazers)
 
 语言: 简体中文 | [English](./readmes/README.en.md) | [日本語](./readmes/README.ja.md) | [한국어](./readmes/README.ko.md) | [Español](./readmes/README.es.md)
 
-> ⚠️ **0.x 开发版（当前 v0.7.1）:** qu-ai-wei 仍在迭代，规则、分类、API 都可能变动。欢迎提 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues) / [discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) / PR 反馈。
+> ⚠️ **0.x 开发版（当前 v0.8.0）:** qu-ai-wei 仍在迭代，规则、分类、API 都可能变动。欢迎提 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues) / [discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) / PR 反馈。
 >
 > **只支持简体中文。** 繁體有自己的 AI 腔特征、用字偏好、排版规范，规则需要单独维护，留给后续版本。
 
@@ -21,7 +21,7 @@ https://github.com/user-attachments/assets/24513c20-968d-437b-8ceb-1ac1f77f6ad6
 
 **这是扫地机 + 打磨工,仍然不是雕刻刀。**
 
-当前 v0.7.1 的行为仍是「扫地机 + 打磨工」,但所有冲突统一按 `SKILL.md` 的「冲突仲裁顺序」六级处理:
+当前 v0.8.0 的行为仍是「扫地机 + 打磨工」,但所有冲突统一按 `SKILL.md` 的「冲突仲裁顺序」六级处理:
 
 - **① 扫地机** —— 清除显眼 AI 污染（赋能 / 助力 / 让我们一起 / 璀璨画卷 / 🚀 emoji 列点 / `**重点**` 机械加粗 / 希望对您有帮助），让稿子从「一眼像 AI」变成「不像 AI 了」。
 - **② 打磨工（v0.6.0 新增）** —— 在**不虚构**的前提下主动打磨：**动词强化**（`进行讨论` → `讨论`）、**节奏重塑**（打断机关枪节奏）、**filler 切除**（`一些 / 实际上 / 在一定程度上`）、**抽象换具体**（仅限原文已有细节）、**语序归位**、**语体匹配**。合格线从"不像 AI 了"抬到"**干净且精准**"。
@@ -53,7 +53,7 @@ https://github.com/user-attachments/assets/24513c20-968d-437b-8ceb-1ac1f77f6ad6
 - ❌ 需要保留叙事铺垫、控制篇章节奏的写作 —— 这个 skill 容易误判"铺垫"（环境描写、人物声口前的停顿、离题式背景段落）为"冗余"删掉；也管不了篇章整体的**势与气**（虎头蛇尾、关键处泄气、论证徘徊不前）。这类写作，qu-ai-wei 最多跑一遍做底层清洁，结构和节奏必须作者自己守住
 - ❌ 用来「把 AI 生成的内容洗白到不被检测出来」—— 请别拿这个 skill 绕过学校 / 期刊 / 公司的 AI 检测政策。qu-ai-wei 不是作弊工具，是让**你自己的真实写作更清爽**的工具
 
-### 一句话定位（v0.7.1）
+### 一句话定位（v0.8.0）
 
 **给一份写过东西的毛坯,出来是一份干净且锋利的终稿。不是伪装你没写过的稿子,也不是把任何稿子改成名家水准的好文章。**
 
@@ -200,7 +200,7 @@ humanize 这段中文:[粘贴中文]
 
 骨架和方法学借自 humanizer：三遍工作流、语音校准、"个性与灵魂"章节、大约一半的模式概念。剩下的在中文语境里重新整理了一遍。
 
-| 方面 | 英文 humanizer | qu-ai-wei（当前 v0.7.1） |
+| 方面 | 英文 humanizer | qu-ai-wei（当前 v0.8.0） |
 |---|---|---|
 | 目标语言 | 定位语言无关，实际规则针对英文 | 简体中文 |
 | 规则数量 | 29 类（参考 Wikipedia "Signs of AI writing"） | 51 类 + **顶层冲突仲裁顺序六级**（不发明事实 → 真人停手门检 → 语体降级保护 → 过度消毒反制 → 51 条减法 → 6 条打磨抬升,v0.7.0 起统一）；约一半是 humanizer 同类规则的中文改写，其余为中文原创（含中文维基《AI生成文的特徵》启发的 4 条，2024-2025 AI 腔新形态 3 条） |
