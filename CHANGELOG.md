@@ -3,7 +3,26 @@
 > 历史版本已从 `README.md` 拆分到本文件（2026-04-23）。
 > 注：版本记录中的章节名以 [`SKILL.md`](./SKILL.md) 为准。
 
-### Unreleased
+### v0.8.0（2026-06-18） · 对照 humanizer 同步:补 3 条模式
+
+参照 [humanizer](https://github.com/blader/humanizer) 较新规则,补 3 条中文有对应语境、此前覆盖不足的模式。全部折叠进既有规则,规则总数仍 51。
+
+**新增 / 扩展模式:**
+
+- **#19b 假坦诚开场(变体)。** `讲真 / 说实话 / 老实说` 当开场钩子 + 后接平铺套话 = AI 腔(三条全中才触发:位置 + 后接 + 密度)。接不确定 / 复杂反应的 `说实话我也不知道` 是毛边,保留。判别式同时写进 `SKILL.md` §过度消毒反制(必加载层),防漏检也防误杀。
+- **#37 格言公式子模板。** 公众号 / 自媒体 `XX 是成年人的 YY` / `XX 是当代人的 ZZ` 把论点包装成可转发金句,密度 + 落点门触发;落点去光环具体则保留(`降薪是成年人的体面`)。
+- **#19 伪洞察枢纽扩展。** `真正的问题是 / 核心在于 / 说到底 / 归根结底` 并入 #19;但 `说到底 / 归根结底` 是地道口语 marker,密度 + 落点门,单次落地不误杀。
+
+**修正:**
+
+- **`references/whitelists.md` 删 `TBH → 说实话` 错译 gloss。** 消除 `说实话` 在 whitelists / 毛边 / #19b 三处的相反语义歧义。
+- **README humanizer 规则计数去精确数(3 处)。** 不再钉死会随 humanizer 发版过时的条数。
+
+**回归:**
+
+- 新增样本 `18-fake-candor-aphorism`,覆盖 #19b 假坦诚开场 + #37 格言公式 + 真诚 `说实话` 保护。
+
+**离线 harness(并入本版):**
 
 - **新增离线 real-run 回归 harness。** `tests/eval-manifest.txt` 把 `tests/check-snapshot-smoke.sh` 里的语义断言整理成 line-oriented manifest;`tests/check-runs.sh <run-dir>` 可校验 `tests/after` anchor output,也可校验未来放在 `tests/runs/<version>-<model>/` 的真实 captured model outputs。
 - **新增 `tests/runs/README.md`。** 说明 captured runs 的手工采集流程和必填 metadata header,明确不要把人工 anchor output 冒充成真实模型输出。
