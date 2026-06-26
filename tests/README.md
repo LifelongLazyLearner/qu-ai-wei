@@ -1,6 +1,6 @@
 # tests/
 
-回归样本和轻量检查脚本。当前包含 17 条手工回归样本 + 3 个自动化同步检查。
+回归样本和轻量检查脚本。当前包含手工回归样本和 4 个自动化检查。
 
 ## 目录
 
@@ -29,6 +29,7 @@
 
 - **`check-version-sync.sh`** — 自动检查 `README.md` / `CHANGELOG.md` / `SKILL.md` / `.cursorrules` / `WARP.md` 的版本号是否同步。
 - **`check-snapshot-smoke.sh`** — 轻量检查 `tests/after/` 里的快照结构是否完整,并对 v0.6.4 新增的 04 / 05、v0.6.5 新增的 06-12、v0.6.6 新增的 13-17 样本做关键断言。
+- **`check-skills-cli-discovery.sh`** — 用 pinned `skills@1.5.13` 跑 `npx --yes skills@1.5.13 add . --list`,只检查外部 `skills` CLI 能发现 `qu-ai-wei`,不做实际安装。
 - **`eval-manifest.txt` + `check-runs.sh`** — 可复用的真实运行检查器。`tests/after/` 仍是人工 anchor output;未来真实模型输出放到 `tests/runs/<version>-<model>/`,再用同一份 manifest 校验。
 - **`runs/README.md`** — 真实模型输出的手工 capture 规范,包含必填 metadata header。
 
@@ -45,6 +46,9 @@ bash tests/check-version-sync.sh
 
 # 快照 smoke check
 bash tests/check-snapshot-smoke.sh
+
+# 外部 skills CLI 发现检查(不安装)
+bash tests/check-skills-cli-discovery.sh
 
 # manifest-based run check(先验证现有 anchor output;真实运行输出同理)
 bash tests/check-runs.sh tests/after
@@ -68,6 +72,7 @@ bash tests/check-runs.sh tests/after
 # 1) 先跑自动检查
 bash tests/check-version-sync.sh
 bash tests/check-snapshot-smoke.sh
+bash tests/check-skills-cli-discovery.sh
 
 # 2) 手工法:用一个干净会话,让模型读 SKILL.md + 当前 references/,逐个处理 fixtures/
 # 输出到 tests/after/(或新建 tests/after-<versiontag>/),然后 diff 旧 after。

@@ -40,6 +40,22 @@ qu-ai-wei が対応するのは **簡体字中国語だけ**です。
 
 同じインストールスクリプトで、Cursor、Claude Code、OpenAI Codex CLI、OpenCode、Kiro、Factory Droid、Slate、Hermes に対応しています。
 
+Node/npm がある場合は、外部の `skills` CLI で入れる方法がおすすめです。デフォルトでは利用可能な agent を自動検出し、見つからない場合は選択を促します。
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
+```
+
+これは外部 `skills` CLI が GitHub リポジトリを取得して入れる方法です。qu-ai-wei の npm package ではありません。
+
+特定の agent に入れたい場合は `-a` を付けます。
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a claude-code -a cursor
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -g -a codex -y
+```
+
 ```bash
 git clone https://github.com/LifelongLazyLearner/qu-ai-wei.git ~/qu-ai-wei
 cd ~/qu-ai-wei

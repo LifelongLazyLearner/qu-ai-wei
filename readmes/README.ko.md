@@ -40,6 +40,22 @@ qu-ai-wei는 **간체 중국어만 지원합니다**.
 
 하나의 설치 스크립트로 Cursor, Claude Code, OpenAI Codex CLI, OpenCode, Kiro, Factory Droid, Slate, Hermes를 지원합니다.
 
+Node/npm이 있다면 외부 `skills` CLI 설치를 권장합니다. 기본값은 사용 가능한 agent를 자동 감지하고, 찾지 못하면 설치 대상을 선택하라고 안내합니다.
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
+```
+
+이 방법은 외부 `skills` CLI가 GitHub 저장소를 가져와 설치합니다. qu-ai-wei npm package가 아닙니다.
+
+특정 agent에 설치하려면 `-a`를 붙입니다.
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a claude-code -a cursor
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -g -a codex -y
+```
+
 ```bash
 git clone https://github.com/LifelongLazyLearner/qu-ai-wei.git ~/qu-ai-wei
 cd ~/qu-ai-wei

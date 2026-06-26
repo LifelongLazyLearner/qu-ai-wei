@@ -40,6 +40,22 @@ No puede:
 
 El mismo script de instalación admite Cursor, Claude Code, OpenAI Codex CLI, OpenCode, Kiro, Factory Droid, Slate y Hermes.
 
+Si tienes Node/npm, la ruta recomendada es el `skills` CLI externo. Por defecto detecta los agents disponibles, o te pide elegir uno si no detecta ninguno:
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
+```
+
+Este método usa el `skills` CLI externo para traer este repositorio de GitHub. No es un paquete npm de qu-ai-wei.
+
+Para instalarlo en agents concretos, añade `-a`:
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a claude-code -a cursor
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -g -a codex -y
+```
+
 ```bash
 git clone https://github.com/LifelongLazyLearner/qu-ai-wei.git ~/qu-ai-wei
 cd ~/qu-ai-wei
