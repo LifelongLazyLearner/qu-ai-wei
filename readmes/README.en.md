@@ -40,6 +40,22 @@ It cannot:
 
 The same install script supports Cursor, Claude Code, OpenAI Codex CLI, OpenCode, Kiro, Factory Droid, Slate, and Hermes.
 
+With Node/npm installed, the recommended path is the external `skills` CLI. By default it detects available agents, or prompts you to choose one:
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
+```
+
+This uses the external `skills` CLI to fetch this GitHub repository. It is not a qu-ai-wei npm package.
+
+To target specific agents, add `-a`:
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a claude-code -a cursor
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -g -a codex -y
+```
+
 ```bash
 git clone https://github.com/LifelongLazyLearner/qu-ai-wei.git ~/qu-ai-wei
 cd ~/qu-ai-wei

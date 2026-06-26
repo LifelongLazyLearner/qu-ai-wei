@@ -78,9 +78,34 @@ https://github.com/user-attachments/assets/24513c20-968d-437b-8ceb-1ac1f77f6ad6
 | Slate | `--platform slate` | `~/.slate/skills/qu-ai-wei` |
 | Hermes | `--platform hermes` | `~/.hermes/skills/qu-ai-wei` |
 
-以上 8 个 agent 安装方式完全一致，统一用一个脚本。
+以上 8 个 agent 都可以用本仓库脚本安装。
 
-### 一键安装（推荐）
+### 通过外部 `skills` CLI 安装（推荐）
+
+如果你已经有 Node/npm，可以用外部 `skills` CLI 直接从 GitHub 安装。默认让 `skills` CLI 自动检测本机可用的 agent；没检测到时，它会提示你选择安装目标。
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
+```
+
+这不是 qu-ai-wei 自己发布 npm 包；命令由 `skills` CLI 拉取本 GitHub 仓库并安装。
+
+如果想明确安装到某个 agent，用 `-a` 指定：
+
+```bash
+# 只装到 Codex
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex
+
+# 同时装到多个 agent
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a claude-code -a cursor
+
+# 装到全局目录，并跳过确认提示
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -g -a codex -y
+```
+
+### 本仓库脚本安装（全控制路径）
+
+如果需要一次装全、软链接 / 复制模式、自定义目录或可重复覆盖，继续用本仓库脚本：
 
 ```bash
 git clone https://github.com/LifelongLazyLearner/qu-ai-wei.git ~/qu-ai-wei
