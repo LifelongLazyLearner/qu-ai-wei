@@ -94,7 +94,7 @@ bash tests/check-triggers.sh        # 新:触发词锚定守卫
 git diff --check
 ```
 
-**已知盲区(已记档,非本版范围):** `check-version-sync.sh` 只查版本号字符串,不 diff flat build 内容;没有任何测试自动比对 `.cursorrules` / `WARP.md` 的正文。对本次 ~15 行的去重,靠 `build-flat.sh` 重生成 + 手动 `git diff` 复核。未来加一个 flat-content-diff 测试是值得的 roadmap 项。
+**已知盲区(v0.8.2 已补):** `check-version-sync.sh` 只查版本号字符串,不 diff flat build 内容。v0.8.1 评审时这还是个盲区 —— 对当时的 ~15 行去重靠 `build-flat.sh` 重生成 + 手动 `git diff` 复核。v0.8.2 新增 [`tests/check-flat-sync.sh`](../tests/check-flat-sync.sh):重新生成一份 flat build 跟仓库里 commit 的 `.cursorrules` / `WARP.md` 做字节级比对,漂移即 fail。此后「改了 SKILL.md / references/ 忘了重跑 `build-flat.sh`」会被 CI 抓到。
 
 ## 评审轮次记录
 
