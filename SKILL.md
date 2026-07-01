@@ -1,6 +1,6 @@
 ---
 name: qu-ai-wei
-version: 0.8.1
+version: 0.8.2
 description: |
   去除简体中文文本里的 AI 写作痕迹,不虚构事实,让终稿干净、精准。
   触发:显式 `/qu-ai-wei`,或用户说「去 AI 味 / 改得说人话 / humanize 中文 / 改自然点 / 读着别扭 / 太生硬了」时自动调用。

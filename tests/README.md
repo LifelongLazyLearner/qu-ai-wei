@@ -28,6 +28,7 @@
 - **`after/`** — 当前 skill 的回归输出快照。`01-03` 是 v0.6.2 重构时保存的对照样本; `04-output.md` 和 `05-output.md` 是 v0.6.4 新增的定向回归,分别盯 #48 否定对举和第负一步真人停手;`06-12` 是 v0.6.5 扩展覆盖;`13-17` 是 v0.6.6 新增的小红书老套路复用 + #47b 占位符 + 护肤成分白名单 + 毒性正能量缝合样本。
 
 - **`check-version-sync.sh`** — 自动检查 `README.md` / `CHANGELOG.md` / `SKILL.md` / `.cursorrules` / `WARP.md` 的版本号是否同步。
+- **`check-flat-sync.sh`** — flat-build 确定性守卫。把 `SKILL.md` + `references/` + `scripts/build-flat.sh` 拷进临时目录重新生成一遍,跟仓库里已 commit 的 `.cursorrules` / `WARP.md` 做字节级比对。`check-version-sync.sh` 只查版本号字符串、不查 flat 正文;本测试补上这个缺口 —— 有人改了 `SKILL.md` 或 `references/` 却忘了重跑 `build-flat.sh`、导致 flat 文件漂移,会被这条抓到。失败信息直接给出 `diff` 和修复命令。
 - **`check-snapshot-smoke.sh`** — 轻量检查 `tests/after/` 里的快照结构是否完整,并对 v0.6.4 新增的 04 / 05、v0.6.5 新增的 06-12、v0.6.6 新增的 13-17 样本做关键断言。
 - **`check-skills-cli-discovery.sh`** — 用 pinned `skills@1.5.13` 跑 `npx --yes skills@1.5.13 add . --list`,只检查外部 `skills` CLI 能发现 `qu-ai-wei`,不做实际安装。
 - **`eval-manifest.txt` + `check-runs.sh`** — 可复用的真实运行检查器。`tests/after/` 仍是人工 anchor output;未来真实模型输出放到 `tests/runs/<version>-<model>/`,再用同一份 manifest 校验。
@@ -44,6 +45,9 @@ diff tests/baseline/03-output.md tests/after/03-output.md | head -100
 
 # 版本号同步检查
 bash tests/check-version-sync.sh
+
+# flat-build 确定性检查(.cursorrules / WARP.md 是否跟 SKILL.md + references/ 同步)
+bash tests/check-flat-sync.sh
 
 # 快照 smoke check
 bash tests/check-snapshot-smoke.sh

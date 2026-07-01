@@ -3,6 +3,33 @@
 > 历史版本已从 `README.md` 拆分到本文件（2026-04-23）。
 > 注：版本记录中的章节名以 [`SKILL.md`](./SKILL.md) 为准。
 
+### v0.8.2（2026-07-01） · flat-build 确定性守卫
+
+补 v0.8.1 评审记档的 roadmap 项:`check-version-sync.sh` 只查版本号字符串、不查 flat 正文,所以「改了 `SKILL.md` / `references/` 忘了重跑 `build-flat.sh`」导致的 `.cursorrules` / `WARP.md` 漂移此前没有自动测试能抓。
+
+**新增:**
+
+- **`tests/check-flat-sync.sh`** —— flat-build 确定性守卫。把 `SKILL.md` + `references/` + `scripts/build-flat.sh` 拷进临时目录重新拍平一份,跟仓库里已 commit 的 `.cursorrules` / `WARP.md` 做字节级比对(`cmp`)。不一致即 fail,失败信息直接给出 `diff` 和修复命令(`bash scripts/build-flat.sh && git add .cursorrules WARP.md`)。`build-flat.sh` 用 `BASH_SOURCE` 解析输出目录,所以临时目录重新生成不会污染工作区。
+
+**文档:**
+
+- `tests/README.md` 加 `check-flat-sync.sh` 条目和「怎么复核」命令。
+- `README.md` 贡献者第 5 条补一句:忘跑 `build-flat.sh` 也没关系,`check-flat-sync.sh` 会抓。
+- `docs/agentskills-review.md` 的「已知盲区」从「roadmap 项」改成「v0.8.2 已补」。
+
+无规则变更,无行为变更,flat 文件内容不变(只版本号 banner 从 0.8.1 → 0.8.2)。
+
+**验证:**
+
+- `bash scripts/build-flat.sh`
+- `bash tests/check-version-sync.sh`
+- `bash tests/check-flat-sync.sh`
+- `bash tests/check-snapshot-smoke.sh`
+- `bash tests/check-runs.sh tests/after`
+- `bash tests/check-triggers.sh`
+- `git diff --check`
+
+
 ### v0.8.1（2026-07-01） · 对照 agentskills.io 评审 + 描述触发词优化 + 品牌表去重
 
 把 `qu-ai-wei` 拿去对照 [agentskills.io](https://agentskills.io) 的 skill 创作最佳实践后,做两处实质优化 + 一套轻量触发词守卫。完整评审见 [`docs/agentskills-review.md`](docs/agentskills-review.md)。51 条模式、冲突仲裁顺序、九语体矩阵、`【门检】`、`打磨报告` 全保留。
