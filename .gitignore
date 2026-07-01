@@ -52,6 +52,12 @@ temp/
 tests/integration-run/
 tests/local/
 
+# Local-only docs (e.g. vendored copies of third-party skills/references)
+docs/superpowers/
+
 # OS
 .Trashes
 ehthumbs.db
+
+# Binary media — too large for git history; distribute via releases / LFS instead
+*.mp4
