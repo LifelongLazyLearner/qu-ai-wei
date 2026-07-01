@@ -1,0 +1,86 @@
+# Trigger-case manifest for the qu-ai-wei skill description.
+#
+# This manifest has TWO roles:
+#   1. Static description-content guard (what check-triggers.sh automates).
+#      Every TRIGGER case carries an `anchor` = a literal substring that MUST
+#      appear in the SKILL.md `description:` frontmatter. If a trigger phrase
+#      is dropped from the description in a future edit, the guard fails. This
+#      catches description regressions/typos — it is NOT a behavioral trigger
+#      test (which needs a non-deterministic model run).
+#   2. A checklist of test queries for the manual behavioral loop (what the
+#      user runs). In a fresh agent session, send each `query`, observe whether
+#      the skill auto-fires, and record the result vs `expect`. The
+#      NO-TRIGGER / BOUNDARY cases exist for this loop; check-triggers.sh does
+#      not assert on them.
+#
+# Format (mirrors eval-manifest.txt):
+# - Blank lines and lines starting with # are ignored.
+# - A case block starts with [NN].
+# - Assertions are key=value; the parser splits only on the first =.
+# - Keys: query, expect (TRIGGER | NO-TRIGGER | BOUNDARY), anchor (TRIGGER
+#   only), note (optional).
+# - expect values: TRIGGER = skill should fire; NO-TRIGGER = skill should NOT
+#   fire (out of scope); BOUNDARY = near-miss, judgement call, document result.
+#
+# Cases target the v0.8.1 description (triggers: 去AI味 / 改得说人话 /
+# humanize中文 / 改自然点 / 读着别扭 / 太生硬了, plus explicit /qu-ai-wei).
+
+[01]
+query=/qu-ai-wei 帮我改这段
+expect=TRIGGER
+anchor=/qu-ai-wei
+
+[02]
+query=帮我去 AI 味
+expect=TRIGGER
+anchor=去 AI 味
+
+[03]
+query=这段读着别扭，帮我看看
+expect=TRIGGER
+anchor=读着别扭
+
+[04]
+query=太生硬了，改一下
+expect=TRIGGER
+anchor=太生硬了
+
+[05]
+query=改自然点
+expect=TRIGGER
+anchor=改自然点
+
+[06]
+query=humanize 这段中文
+expect=TRIGGER
+anchor=humanize
+
+[07]
+query=改得说人话一点
+expect=TRIGGER
+anchor=改得说人话
+
+[08]
+query=翻译成中文
+expect=NO-TRIGGER
+note=生成 / 翻译，非 de-AI 化。SKILL.md 边界明示不属于本 skill。
+
+[09]
+query=写一段中文介绍
+expect=NO-TRIGGER
+note=生成，非 de-AI 化。SKILL.md 边界明示不属于本 skill。
+
+[10]
+query=润色一下我的论文
+expect=BOUNDARY
+note=可能只是语法润色而非去 AI 味；如果原文是真人写的学术文本，第负一步门检会停手。
+
+[11]
+query=这段太书面了改口语点
+expect=BOUNDARY
+note=语体降级请求，§3 语体降级保护约束跨档；若原文是真人写的，不改语言本身。
+
+[12]
+query=帮我 proofread 一下这篇
+expect=BOUNDARY
+note=proofread ≠ 去 AI 味；但若文本 AI 味重，可能附带处理。看原文性质。

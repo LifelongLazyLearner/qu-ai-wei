@@ -3,6 +3,44 @@
 > 历史版本已从 `README.md` 拆分到本文件（2026-04-23）。
 > 注：版本记录中的章节名以 [`SKILL.md`](./SKILL.md) 为准。
 
+### v0.8.1（2026-07-01） · 对照 agentskills.io 评审 + 描述触发词优化 + 品牌表去重
+
+把 `qu-ai-wei` 拿去对照 [agentskills.io](https://agentskills.io) 的 skill 创作最佳实践后,做两处实质优化 + 一套轻量触发词守卫。完整评审见 [`docs/agentskills-review.md`](docs/agentskills-review.md)。51 条模式、冲突仲裁顺序、九语体矩阵、`【门检】`、`打磨报告` 全保留。
+
+**描述触发词优化(对照「Optimizing descriptions」):**
+
+- **frontmatter `description` 改写。** 模型倾向 under-trigger,描述要把用户真会打的触发话术写进去。新增三个真实高频、原描述 0% 覆盖的触发词:**`读着别扭`**(抓「能感到别扭但说不出『AI 味』」的用户,原触发词全部明示 AI / 人话,这是最大盲区)、**`太生硬了`**(AI 生成 / 翻译腔文本的标准中文描述词)、**`改自然点`**(跟「改得说人话」语义相邻但更口语)。去掉跟正文 `这段中文太 AI 了,改一下` 重复的 `这段太 AI 了`。
+- **措辞调整。** 去掉早期草案里的 `且…任何`(翻译腔 + 过度修正),恢复简洁 `不虚构事实`;每行加角色标签(触发 / 约束 / 范围);`暂未纳入` → `不自动处理`(更如实 —— §2 真人停手门检其实接受繁體输入,停手只清格式,不是「完全不管」)。
+
+**品牌表去重(对照 context economy):**
+
+- 「品牌广告 vs 自媒体营销号:三条识别线」(3 行表 + 4 个边界场景)**此前在 `SKILL.md` 和 `references/brand-voice.md` 各一份**。`build-flat.sh` 先原样吐 `SKILL.md` 正文(含这份表),再在附录拼 `brand-voice.md`(又含一份),flat build 把同一张表发了两遍。改动:`SKILL.md` 删掉自己的副本,留一行指针,显式说明「在语体识别阶段若拿不准是品牌广告还是自媒体,读 `brand-voice.md` 的同名小节」(指针特意前移到鉴别阶段,绕开 `brand-voice.md` preamble「非品牌语体不需要读此文件」的 load-order 陷阱)。canonical 副本留 `brand-voice.md`。flat build 净减 ~15 行。顺带修了预存 bug:`SKILL.md` 原写「**两个**边界场景」却列 4 条,`brand-voice.md` 正确写「**四个**」—— 去重后 canonical 用对的那个。
+
+**触发词守卫(扩展既有 tests/,不另起 evals/):**
+
+- 新增 `tests/trigger-manifest.txt` —— ~12 条触发用例(TRIGGER / NO-TRIGGER / BOUNDARY),格式复用 `eval-manifest.txt` 的 `[NN]` + `key=value`。BOUNDARY 含 `SKILL.md` 边界明示的不属于本 skill 的请求(`翻译成中文` / `写一段中文`)。
+- 新增 `tests/check-triggers.sh` —— 静态守卫:对每条 TRIGGER 用例,断言它的 `anchor` 在 `SKILL.md` `description:` 里逐字存在。**这是描述内容守卫,不是行为触发测试**(真实触发行为测试需要不确定的模型跑一轮,留给用户在干净会话里逐条手跑)。
+
+**刻意没动(已记档):**
+
+- **51 条模式索引表**不挪到 reference —— 它是「决策树扫描面」(`SKILL.md` 自述 + `build-flat.sh` 注释「索引 + 详情并存」),挪走会倒置 progressive disclosure。
+- **破折号密度基线**不挪 —— `references/punctuation.md` 没有对应小节,挪过去会在 flat build 附录里重排内容顺序。
+- **flat-content-diff 自动测试** —— `check-version-sync.sh` 只查版本号字符串,不 diff flat 正文。本次 ~15 行去重靠 `build-flat.sh` 重生成 + 手动 `git diff` 复核。未来加 flat-content-diff 测试是值得的 roadmap 项。
+
+**评审过程:**
+
+本版经三轮 AGENTS.md 对抗评审(CEO / 中文 authentic / 工程 effectiveness)。前两轮 plan 被 reject:evals/ 目录跟刚发布的 tests/ harness 撞车;flat-build「不变」声明被证伪(品牌表本就重复);所有实质改动被「提议但不应用」地推走。最终 substance-first 重设计获三位评审 approve,verdict 记在本 commit body。
+
+**验证:**
+
+- `bash scripts/build-flat.sh`
+- `bash tests/check-version-sync.sh`
+- `bash tests/check-snapshot-smoke.sh`
+- `bash tests/check-runs.sh tests/after`
+- `bash tests/check-triggers.sh`
+- `git diff --check`
+
+
 ### v0.8.0（2026-06-18） · 对照 humanizer 同步:补 3 条模式
 
 参照 [humanizer](https://github.com/blader/humanizer) 较新规则,补 3 条中文有对应语境、此前覆盖不足的模式。全部折叠进既有规则,规则总数仍 51。
