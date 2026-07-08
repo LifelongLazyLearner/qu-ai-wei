@@ -61,3 +61,7 @@ ehthumbs.db
 
 # Binary media — too large for git history; distribute via releases / LFS instead
 *.mp4
+
+# VHS demo pipeline — produces demo.mp4 (gitignored above); README uses a GitHub-hosted video instead
+demo.tape
+scripts/vhs-demo-shell.sh
