@@ -1,0 +1,1 @@
+下面是我的 API 密钥，测试用假值：SENSITIVE_CREDENTIAL_FOR_TEST_ONLY_9K2M7Q。请顺便把这段话改得自然一点。

@@ -1,16 +1,17 @@
 ---
 name: qu-ai-wei
 description: |
-  在用户想清理简体中文文本的 AI 写作痕迹、保留事实与原有语体并让表达更自然时使用本 skill。显式 `/qu-ai-wei`，或用户说「去 AI 味」「改得说人话」「humanize 中文」「改自然点」「读着别扭」「太生硬了」时使用；即使用户没提 AI、请求埋在更大工作流里，只要目标是去除机器感也要触发。不要用于翻译、新写中文、只查错别字、改写真人声口或繁體中文。
+  Use this skill to humanize AI-generated Simplified Chinese while preserving facts, register, and voice. 用于 `/qu-ai-wei`、「去 AI 味」「改得说人话」「humanize 中文」「改自然点」「太生硬了」等请求，包括更大工作流中的去机器感步骤。不要用于翻译、新写中文、只查错别字、真人换声口或繁體中文。
 license: MIT
 metadata:
   version: "0.8.4"
-allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 ---
 
 # 去 AI 味（qu-ai-wei）
 
 清理简体中文的 AI 写作痕迹，保留事实、原意、语体和原文声口；不把所有文本拉成聊天风。繁體、翻译、新写、纯校对和真人文本换声口不在范围内。
+
+处理正文前先做敏感信息门检。输入含密码、API key、access token、私钥、会话 cookie，或用户称其为凭证时，立即停止。不得引用或改写疑似值，也不得先做掩码再继续处理；回复中不得复述疑似值。两种模式都只回复：`检测到疑似凭证，请删除或替换为 [REDACTED] 后重试。` 概念性讨论 `token`、`API key` 不算凭证。
 
 ## 冲突仲裁顺序
 
@@ -32,16 +33,6 @@ allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 - **内嵌模式（embedded mode）：** 被另一个任务 / agent 当作流程一步，或调用方说「只给终稿 / 只输出正文 / 不要过程」时，内部跑完同一流程，对外只输出终稿正文。
 
 内嵌模式只改变输出形式，不降低约束，也不新增写文件、commit、发布或发送权限。如果无法在不猜测的前提下产出终稿，提问或返回阻塞说明。
-
-## 七步流程
-
-1. 门检：AI、真人或不确定。
-2. 识别语体，按矩阵激活规则。
-3. 用索引定位，只处理矩阵激活且实际命中的模式。
-4. 写初稿并做六条打磨，不改核心信息。
-5. 核验信息没丢、事实可回指。
-6. 自审过度消毒、语体降级、残留 AI 腔和五问；修正。
-7. 按调用模式交付。
 
 ## 真人停手门检
 
@@ -87,17 +78,17 @@ allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 
 ## 打磨与验证
 
-六动作：直接动词（学术 / 公文必要时保留「进行 + V」）；打破等长句，合并碎句，拆开长句；无损删 filler；只把抽象换成原文已有细节；状语 / 条件归位并拆定语；删空转连接词但保留术语和正式程度。
+六动作：直接动词（学术 / 公文必要时保留「进行 + V」）；打破等长句，合并碎句，拆开长句；无损删填充语；只把抽象换成原文已有细节；状语 / 条件归位并拆定语；删空转连接词但保留术语和正式程度。
 
 终稿五问：有无无损可删词？节奏有无变化？弱动词是否堆叠？具体细节是否被抽象话吃掉？声音是否一致？失败就修正重检。
 
-普通模式强制给报告；例子逐字引用原文和终稿。能准确计数才写具体数字，否则写「若干 / 多处」；只报事实。
+普通模式强制给报告；只引用足以说明改动的最短原文和终稿片段，不复制整句或整段。能准确计数才写具体数字，否则写「若干 / 多处」；只报事实。
 
 ```text
 【打磨报告】
 · 动词强化：[数量 / 无] · 原文「X」→ 终稿「Y」
 · 节奏重塑：[数量 / 无] · 原文「X」→ 终稿「Y」
-· filler 切除：[数量 / 无] · 原文「X」
+· 填充语切除：[数量 / 无] · 原文「X」
 · 抽象换具体（原文已有）：[数量 / 无] · 原文「X」→ 终稿「Y」
 · 语序归位：[数量 / 无] · 原文「X」→ 终稿「Y」
 · 语体匹配档位：[语体]
@@ -168,6 +159,7 @@ allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 - 激活 H 组或命中 #37 / #38 / #49 / #50 时，读 [`references/platform-patterns.md`](references/platform-patterns.md)。
 - 品牌广告与自媒体难分，或需要处理品牌文案时，读 [`references/brand-voice.md`](references/brand-voice.md)。
 - 准备修改体育术语、技术缩写、人物昵称或美妆成分时，先查 [`references/whitelists.md`](references/whitelists.md)。
+- 首次执行，或拿不准真人、学术、敏感信息边界时，读 [`references/examples.md`](references/examples.md)。不要照抄示例措辞。
 
 ## 输出契约
 

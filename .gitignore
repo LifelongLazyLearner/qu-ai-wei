@@ -2,6 +2,7 @@
 AGENTS.md
 .claude/
 tests/runs/
+assets/social-preview.png
 
 # Local secrets and OS metadata
 .env

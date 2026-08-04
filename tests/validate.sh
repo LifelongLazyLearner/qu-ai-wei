@@ -15,15 +15,19 @@ required=(
   README.md
   SKILL.md
   agents/openai.yaml
+  assets/demo.gif
   readmes/README.en.md
   readmes/README.es.md
   readmes/README.ja.md
   readmes/README.ko.md
   references/brand-voice.md
   references/editing-boundaries.md
+  references/examples.md
   references/platform-patterns.md
   references/whitelists.md
   tests/README.md
+  tests/blind-review/README.md
+  tests/blind-review/prepare.py
   tests/check-runs.sh
   tests/check-triggers.sh
   tests/eval-manifest.txt
@@ -38,6 +42,8 @@ grep -q '^name: qu-ai-wei$' SKILL.md
 grep -q '^description: |$' SKILL.md
 grep -q '内嵌模式（embedded mode）' SKILL.md
 grep -q '只输出终稿正文' SKILL.md
+grep -q '敏感信息门检' SKILL.md
+grep -q 'assets/demo.gif' README.md
 
 version="$(sed -n 's/^  version: "\([^"]*\)"$/\1/p' SKILL.md)"
 [ -n "$version" ] || { echo "missing metadata.version in SKILL.md" >&2; exit 1; }
@@ -46,12 +52,14 @@ grep -q 'display_name: "去 AI 味"' agents/openai.yaml
 grep -q 'short_description: "' agents/openai.yaml
 grep -q 'default_prompt: ".*\$qu-ai-wei' agents/openai.yaml
 
-for reference in editing-boundaries platform-patterns brand-voice whitelists; do
+for reference in editing-boundaries examples platform-patterns brand-voice whitelists; do
   grep -q "references/${reference}.md" SKILL.md || {
     echo "SKILL.md does not route to references/${reference}.md" >&2
     exit 1
   }
 done
+
+python3 tests/blind-review/prepare.py --help >/dev/null
 
 grep -q '^      - "v\*\.\*\.\*"$' .github/workflows/release.yml
 grep -q 'tag .* does not match SKILL.md version' .github/workflows/release.yml
@@ -61,7 +69,7 @@ grep -q 'bash tests/validate.sh' .github/workflows/validate.yml
 bash tests/check-triggers.sh
 
 case_count="$(grep -Ec '^\[[0-9][0-9]\]$' tests/eval-manifest.txt)"
-[ "$case_count" -eq 6 ] || { echo "expected 6 eval cases, found $case_count" >&2; exit 1; }
+[ "$case_count" -eq 7 ] || { echo "expected 7 eval cases, found $case_count" >&2; exit 1; }
 
 while IFS='=' read -r key value; do
   [ "$key" = "fixture" ] || continue

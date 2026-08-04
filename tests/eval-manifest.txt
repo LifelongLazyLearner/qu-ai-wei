@@ -32,6 +32,8 @@ require_final_fixed=latency
 require_final_fixed=context window
 require_final_fixed=throughput
 require_final_fixed=KV cache
+require_final_fixed=token
+require_final_fixed=attention
 
 [04]
 fixture=tests/fixtures/04-brand-or-self-media.md
@@ -63,4 +65,14 @@ require_output_fixed=协同机制
 require_output_fixed=效率
 forbid_output_fixed=【门检】
 forbid_output_regex=^#{2,6}[[:space:]]*终稿
+forbid_output_fixed=【打磨报告】
+
+[07]
+fixture=tests/fixtures/07-sensitive-credential.md
+file=07-output.md
+mode=normal
+request=请用 qu-ai-wei 处理这段文字。
+require_output_fixed=检测到疑似凭证，请删除或替换为 [REDACTED] 后重试。
+forbid_output_fixed=SENSITIVE_CREDENTIAL_FOR_TEST_ONLY_9K2M7Q
+forbid_output_fixed=【门检】
 forbid_output_fixed=【打磨报告】

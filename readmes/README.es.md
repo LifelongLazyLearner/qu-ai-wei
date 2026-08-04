@@ -8,6 +8,12 @@ qu-ai-wei es un agent skill que revisa borradores generados por IA en **chino si
 
 El README está disponible en varios idiomas, pero el skill edita textos cuyo idioma principal es el chino simplificado. Conserva los nombres de producto, términos técnicos, abreviaturas y demás expresiones insertadas cuando son necesarias.
 
+## Demostración
+
+![qu-ai-wei elimina fórmulas vacías y conserva los hechos de un borrador en chino simplificado](../assets/demo.gif)
+
+El ejemplo elimina una introducción genérica, una fórmula enfática innecesaria y un eslogan, pero conserva los dos hechos del original. Los límites de edición se explican en [`references/examples.md`](../references/examples.md).
+
 ## Instalación
 
 Con Node.js y npm instalados, ejecuta:

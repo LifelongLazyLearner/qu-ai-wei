@@ -8,6 +8,12 @@ qu-ai-wei edits AI-generated drafts written in **Simplified Chinese** so they re
 
 This README is available in several languages, but the skill itself edits prose whose primary language is Simplified Chinese. Necessary product names, technical terms, abbreviations, and other embedded terms are preserved.
 
+## See It Work
+
+![qu-ai-wei removes boilerplate while preserving the facts in a Simplified Chinese draft](../assets/demo.gif)
+
+The example removes a generic opening, an unnecessary emphasis cue, and a slogan while preserving the two stated facts. See [`references/examples.md`](../references/examples.md) for the editing boundaries behind the example.
+
 ## Install
 
 With Node.js and npm installed, run:
