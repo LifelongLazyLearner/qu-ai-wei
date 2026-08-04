@@ -1,63 +1,11 @@
-# Claude Code / IDE state — never commit, every machine has its own
+# Local agent and validation state
+AGENTS.md
 .claude/
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-Thumbs.db
+tests/validate-local.sh
 
-# API keys / secrets — scripts read from env vars (~/.api-keys.env etc.)
-# If you need a local override, put it in .env.local (gitignored below).
+# Local secrets and OS metadata
 .env
 .env.*
-!.env.example
-api-keys.env
 *.key
 *.pem
-secrets/
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.egg-info/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.venv/
-venv/
-env/
-
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Logs and temp
-*.log
-*.tmp
-tmp/
-temp/
-
-# tests/ 的公开子目录:
-#   tests/fixtures/  — 3 条回归用的 AI 腔样本(公开,是 v0.6.2 "行为不变" 的证据)
-#   tests/baseline/  — 结构重构前(v0.6.1 SKILL.md)对 fixtures 的输出(公开)
-#   tests/after/     — 结构重构后(v0.6.2 lean SKILL.md + references)的输出(公开)
-#
-# tests/ 的本地子目录(不公开):
-#   tests/integration-run/ — 调 API 跑回归的脚本和中间产物,涉及密钥和大量样本
-#   tests/local/           — 本地试验、临时文件
-tests/integration-run/
-tests/local/
-
-# Local-only docs (e.g. vendored copies of third-party skills/references)
-docs/superpowers/
-
-# OS
-.Trashes
-ehthumbs.db
-
-# Binary media — too large for git history; distribute via releases / LFS instead
-*.mp4
+.DS_Store
