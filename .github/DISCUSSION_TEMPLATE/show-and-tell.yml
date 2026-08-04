@@ -1,0 +1,70 @@
+title: "[样本] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        分享一份 qu-ai-wei 的真实运行样本，帮助项目发现漏判、误判和过度修正。
+
+        不必贴全文，只贴需要讨论的句子也可以。提交前请删除人名、公司名、内部信息、密钥和其他敏感内容。
+
+  - type: textarea
+    id: original
+    attributes:
+      label: 原文与请求
+      description: 粘贴已脱敏的简体中文原文，以及你对 agent 说的话
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: qu-ai-wei 的结果
+      description: 普通模式请尽量保留门检、终稿和打磨报告；内嵌模式贴实际正文即可
+    validations:
+      required: true
+
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: 你觉得改得怎么样
+      options:
+        - 改得不错——该删的删了，该留的留了
+        - 有漏判——还留着明显的 AI 腔
+        - 有误判——把正常表达当成了 AI 腔
+        - 改过头——原文声口或必要语体被削弱
+        - 改坏了——丢失或增加了事实
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 具体说明
+      description: 指出对应原句和终稿，说明哪里应保留或怎样修改
+
+  - type: input
+    id: host
+    attributes:
+      label: Agent / 宿主
+      placeholder: "Codex / Claude Code / Kimi Code CLI / 其他 Agent Skills 宿主"
+
+  - type: input
+    id: model
+    attributes:
+      label: 模型或服务商（可选）
+      placeholder: "OpenAI / Anthropic / GLM / Kimi / 其他"
+
+  - type: input
+    id: version
+    attributes:
+      label: qu-ai-wei 版本或 commit（可选）
+      placeholder: "v0.8.4 / commit SHA"
+
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: 使用许可
+      options:
+        - label: 我已删除敏感信息，并同意项目将这份样本用于规则改进和回归测试。
+          required: true

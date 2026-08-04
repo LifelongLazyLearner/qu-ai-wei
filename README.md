@@ -28,6 +28,18 @@ npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
 
 `skills` 会自动检测本机支持的 AI 编程工具。
 
+## 支持的工具
+
+qu-ai-wei 使用开放的 Agent Skills 格式。Codex、Claude Code、Kimi Code CLI、Cursor 和 OpenCode 等工具可以直接加载同一份 `SKILL.md` 和 `references/`；`agents/openai.yaml` 只为 Codex / ChatGPT 提供展示名称、简介和默认提示词。
+
+需要明确安装目标时，可以运行：
+
+```bash
+npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a claude-code -a kimi-code-cli
+```
+
+GLM 是模型系列，不是安装目标。如果你通过 Claude Code、Kimi Code CLI 或其他支持 Agent Skills 的工具使用 GLM，仍安装同一份 skill；不必为 GLM 复制规则或新建配置文件。
+
 ## 使用
 
 安装后，新建会话或按工具要求重新加载 skills，再直接说：

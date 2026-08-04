@@ -1,0 +1,70 @@
+name: 🐛 Bug Report
+description: 报告误判、漏检、改写错误或触发问题
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请提供一份最小复现。提交前删除人名、公司名、内部信息、密钥和其他敏感内容。
+
+  - type: dropdown
+    id: problem-type
+    attributes:
+      label: 问题类型
+      options:
+        - 没有触发 skill
+        - 漏检（该识别的没识别）
+        - 误判（不该识别的识别了）
+        - 改写错误（识别正确但改坏了）
+        - 输出格式不符合模式
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: host
+    attributes:
+      label: Agent / 宿主
+      description: 例如 Codex、Claude Code、Kimi Code CLI，或使用 GLM 的具体宿主
+      placeholder: "Claude Code"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: qu-ai-wei 版本或 commit
+      placeholder: "v0.8.4 / commit SHA"
+
+  - type: textarea
+    id: input
+    attributes:
+      label: 原文与请求
+      description: 粘贴触发问题的简体中文原文，以及你对 agent 说的话
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+      description: 粘贴 agent 实际返回的内容；普通模式请保留门检和打磨报告
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+      description: 说明应该触发、停手、保留或改写什么
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我已删除不应公开的敏感信息。
+          required: true

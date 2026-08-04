@@ -1,0 +1,75 @@
+name: 💡 Pattern Suggestion / 建议新模式
+description: 建议增加、收窄或修正 AI 腔模式
+title: "[Pattern] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        单个词出现一次通常不构成 AI 腔。请说明它在什么语体、结构或密度下会出问题，并删除敏感信息。
+
+  - type: textarea
+    id: pattern
+    attributes:
+      label: 模式与判定边界
+      description: 描述需要处理的结构，也说明什么情况下不应处理
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: 原文示例
+      description: 提供一个或几个真实、已脱敏的例子；不要为提交 issue 编造来源
+    validations:
+      required: true
+
+  - type: dropdown
+    id: register
+    attributes:
+      label: 最相关的语体
+      options:
+        - 社交
+        - 自媒体
+        - 商务
+        - 书面
+        - 特稿
+        - 品牌
+        - 学术
+        - 公文
+        - 高考
+        - 多种语体
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 最接近的规则组
+      options:
+        - A. 内容
+        - B. 语言
+        - C. 修辞
+        - D. 交流
+        - E. 填充
+        - F. 翻译腔
+        - G. 篇章与节奏
+        - H. 平台
+        - I. 幻觉与格式
+        - 新类别
+    validations:
+      required: true
+
+  - type: textarea
+    id: rewrite
+    attributes:
+      label: 建议的处理方向
+      description: 说明应删除、保留、重排还是先问用户；不能加入原文没有的事实
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我已删除不应公开的敏感信息。
+          required: true
