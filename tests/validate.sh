@@ -75,7 +75,8 @@ if ! npx --yes skills@1.5.13 add . --list -a codex >"$output" 2>&1; then
   echo "skills CLI discovery failed" >&2
   exit 1
 fi
-if ! grep -q 'Found 1 skill' "$output" || ! grep -q 'qu-ai-wei' "$output"; then
+plain_output="$(LC_ALL=C sed $'s/\033\\[[0-9;?]*[ -\\/]*[@-~]//g' "$output")"
+if ! grep -Fq 'Found 1 skill' <<<"$plain_output" || ! grep -Fq 'qu-ai-wei' <<<"$plain_output"; then
   cat "$output" >&2
   echo "skills CLI did not discover qu-ai-wei" >&2
   exit 1
