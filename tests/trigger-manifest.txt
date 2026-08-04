@@ -1,0 +1,56 @@
+# Trigger and exclusion anchors. These are static description checks, not
+# behavioral invocation tests; every anchor must appear literally in SKILL.md.
+
+[01]
+query=/qu-ai-wei 请处理这段文字
+expect=TRIGGER
+anchor=/qu-ai-wei
+
+[02]
+query=帮我去 AI 味
+expect=TRIGGER
+anchor=去 AI 味
+
+[03]
+query=把这段改得说人话
+expect=TRIGGER
+anchor=改得说人话
+
+[04]
+query=humanize 中文
+expect=TRIGGER
+anchor=humanize 中文
+
+[05]
+query=这段读着别扭，改自然点
+expect=TRIGGER
+anchor=改自然点
+
+[06]
+query=这段太生硬了
+expect=TRIGGER
+anchor=太生硬了
+
+[07]
+query=把这段翻译成简体中文
+expect=EXCLUDE
+anchor=翻译
+note=翻译不属于本 skill
+
+[08]
+query=帮我新写一段产品介绍
+expect=EXCLUDE
+anchor=新写中文
+note=新写不属于本 skill
+
+[09]
+query=只检查错别字
+expect=EXCLUDE
+anchor=只查错别字
+note=纯校对不属于本 skill
+
+[10]
+query=把这段繁體中文改得更自然
+expect=EXCLUDE
+anchor=繁體中文
+note=繁體中文不属于本 skill

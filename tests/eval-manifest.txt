@@ -1,0 +1,66 @@
+# Run each fixture in a clean session with its request, save output under one
+# run directory using `file`, then call `bash tests/check-runs.sh <run-dir>`.
+
+[01]
+fixture=tests/fixtures/01-general-ai-prose.md
+file=01-output.md
+mode=normal
+request=请用 qu-ai-wei 处理这段文字。
+require_output_fixed=【门检】判断：AI 生成文本
+require_output_regex=^#{2,6}[[:space:]]*终稿
+require_output_fixed=【打磨报告】
+require_final_fixed=两周
+require_final_fixed=三次
+require_final_fixed=评审
+
+[02]
+fixture=tests/fixtures/02-human-stop.md
+file=02-output.md
+mode=normal
+request=请用 qu-ai-wei 处理这段文字。
+require_output_fixed=真人文本（停手）
+forbid_output_regex=^#{2,6}[[:space:]]*初稿
+forbid_output_fixed=【打磨报告】
+
+[03]
+fixture=tests/fixtures/03-academic-technical.md
+file=03-output.md
+mode=normal
+request=下面是 AI 生成的学术技术初稿，请用 qu-ai-wei 处理。
+require_output_regex=^#{2,6}[[:space:]]*终稿
+require_final_fixed=latency
+require_final_fixed=context window
+require_final_fixed=throughput
+require_final_fixed=KV cache
+
+[04]
+fixture=tests/fixtures/04-brand-or-self-media.md
+file=04-output.md
+mode=normal
+request=请用 qu-ai-wei 处理这段文字。
+require_output_fixed=发布
+require_output_fixed=判断：不确定
+require_output_fixed=行动：反问用户
+forbid_output_regex=^#{2,6}[[:space:]]*终稿
+
+[05]
+fixture=tests/fixtures/05-placeholder.md
+file=05-output.md
+mode=normal
+request=请用 qu-ai-wei 处理这段文字。
+require_output_regex=^#{2,6}[[:space:]]*终稿
+require_final_fixed=XX 路
+require_final_fixed=核对
+forbid_final_fixed=幸福路
+
+[06]
+fixture=tests/fixtures/06-embedded-mode.md
+file=06-output.md
+mode=embedded
+request=把 qu-ai-wei 作为当前流程的一步处理，只输出终稿正文。
+require_output_fixed=团队
+require_output_fixed=协同机制
+require_output_fixed=效率
+forbid_output_fixed=【门检】
+forbid_output_regex=^#{2,6}[[:space:]]*终稿
+forbid_output_fixed=【打磨报告】

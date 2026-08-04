@@ -164,6 +164,7 @@ allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 
 不要默认加载全部参考；只在对应判断会改变改写结果时读取：
 
+- 准备依据 #9–18、#25、#33–36 或 #39–48 修改原文时，先读 [`references/editing-boundaries.md`](references/editing-boundaries.md)；只扫描、未准备修改时不要加载。
 - 激活 H 组或命中 #37 / #38 / #49 / #50 时，读 [`references/platform-patterns.md`](references/platform-patterns.md)。
 - 品牌广告与自媒体难分，或需要处理品牌文案时，读 [`references/brand-voice.md`](references/brand-voice.md)。
 - 准备修改体育术语、技术缩写、人物昵称或美妆成分时，先查 [`references/whitelists.md`](references/whitelists.md)。
