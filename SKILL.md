@@ -160,6 +160,14 @@ allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 - **#50 B 站 AI 味：** 时间轴幻觉 / 升华 / 机械玩梗 / 字幕残留。
 - **#51 泛化第二人称：** 用用户 / 大家 / 各位替代「你」。
 
+## 按需参考
+
+不要默认加载全部参考；只在对应判断会改变改写结果时读取：
+
+- 激活 H 组或命中 #37 / #38 / #49 / #50 时，读 [`references/platform-patterns.md`](references/platform-patterns.md)。
+- 品牌广告与自媒体难分，或需要处理品牌文案时，读 [`references/brand-voice.md`](references/brand-voice.md)。
+- 准备修改体育术语、技术缩写、人物昵称或美妆成分时，先查 [`references/whitelists.md`](references/whitelists.md)。
+
 ## 输出契约
 
 ### 普通模式

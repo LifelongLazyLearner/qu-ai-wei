@@ -1,5 +1,14 @@
 # 去 AI 味（qu-ai-wei）
 
+[![Version](https://img.shields.io/github/v/release/LifelongLazyLearner/qu-ai-wei?label=version)](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![Language](https://img.shields.io/badge/lang-简体中文-red.svg)](#)
+[![GitHub stars](https://img.shields.io/github/stars/LifelongLazyLearner/qu-ai-wei?style=social)](https://github.com/LifelongLazyLearner/qu-ai-wei/stargazers)
+
+语言：简体中文 | [English](./readmes/README.en.md) | [日本語](./readmes/README.ja.md) | [한국어](./readmes/README.ko.md) | [Español](./readmes/README.es.md)
+
+> ⚠️ **0.x 开发版：** qu-ai-wei 仍在迭代，规则、分类、调用方式和输出格式都可能变动。最新发布版本见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)；欢迎提 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) 或 PR 反馈。
+
 qu-ai-wei 用来修改 AI 生成的简体中文初稿，让文字读起来更自然，同时保留原来的事实、意思、正式程度和说话方式。
 
 它会清理套话、机械结构、翻译腔和过度工整的表达，但不会：
