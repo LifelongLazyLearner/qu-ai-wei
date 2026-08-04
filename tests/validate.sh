@@ -70,9 +70,16 @@ done < tests/eval-manifest.txt
 
 output="$(mktemp)"
 trap 'rm -f "$output"' EXIT
-npx --yes skills@1.5.13 add . --list >"$output"
-grep -q 'Found 1 skill' "$output"
-grep -q 'qu-ai-wei' "$output"
+if ! npx --yes skills@1.5.13 add . --list -a codex >"$output" 2>&1; then
+  cat "$output" >&2
+  echo "skills CLI discovery failed" >&2
+  exit 1
+fi
+if ! grep -q 'Found 1 skill' "$output" || ! grep -q 'qu-ai-wei' "$output"; then
+  cat "$output" >&2
+  echo "skills CLI did not discover qu-ai-wei" >&2
+  exit 1
+fi
 
 git diff --check
 git diff --cached --check
