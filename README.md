@@ -9,7 +9,7 @@
 
 qu-ai-wei 是一个中文改写 skill。它会清理套话、机械结构、翻译腔和过度工整的表达，但不会替作者编观点、经历或细节，也不会把技术文档、公文和学术文字统一改成聊天口吻。
 
-[看效果](#看效果) · [常见模式](#常见的中文-ai-味) · [30 秒上手](#30-秒上手) · [怎么工作](#怎么工作) · [使用边界](#使用边界) · [Star History](#star-history)
+[看效果](#看效果) · [常见模式](#常见的中文-ai-味) · [30 秒上手](#30-秒上手) · [怎么工作](#怎么工作) · [使用边界](#使用边界)
 
 语言：简体中文 | [English](./readmes/README.en.md) | [日本語](./readmes/README.ja.md) | [한국어](./readmes/README.ko.md) | [Español](./readmes/README.es.md)
 
@@ -118,12 +118,6 @@ npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a clau
 - 不要粘贴密码、API key 或其他凭证；检测到疑似凭证时，skill 会停止并要求先脱敏。
 
 > **0.x 开发版：** qu-ai-wei 仍在迭代，规则、分类、调用方式和输出格式可能变动。最新发布版本见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)；欢迎提交 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) 或 PR。
-
-## Star History
-
-[![qu-ai-wei Star History](./assets/star-history.svg)](https://www.star-history.com/?repos=LifelongLazyLearner%2Fqu-ai-wei&type=date&legend=top-left)
-
-图表使用 GitHub Stargazers API 数据生成，快照截至 2026-08-10；点击图片可打开 Star History 查询页。GitHub 当前限制匿名读取 Star 时间数据，因此这里不向第三方提供仓库凭证，也不使用会显示错误信息的旧版动态嵌入。
 
 ## 来源与许可
 
