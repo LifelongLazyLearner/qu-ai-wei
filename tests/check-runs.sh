@@ -4,12 +4,16 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-if [ "$#" -ne 1 ] || [ ! -d "$1" ]; then
-  echo "usage: bash tests/check-runs.sh <run-directory>" >&2
+if [ "$#" -lt 1 ] || [ ! -d "$1" ]; then
+  echo "usage: bash tests/check-runs.sh <run-directory> [case-id ...]" >&2
   exit 2
 fi
 
 RUN_DIR="$1"
+shift
+filter_count="$#"
+selected_cases=" $* "
+checked_count=0
 id=""
 file=""
 require_output_fixed=()
@@ -18,6 +22,8 @@ require_output_regex=()
 forbid_output_regex=()
 require_final_fixed=()
 forbid_final_fixed=()
+require_final_regex=()
+forbid_final_regex=()
 
 reset_case() {
   file=""
@@ -27,13 +33,14 @@ reset_case() {
   forbid_output_regex=()
   require_final_fixed=()
   forbid_final_fixed=()
+  require_final_regex=()
+  forbid_final_regex=()
 }
 
 extract_final() {
   awk '
-    /^#{2,6}[[:space:]]*终稿/ { active=1; found=1; next }
-    active && /^【(打磨报告|改动摘要)】/ { active=0; next }
-    /^#{2,6}[[:space:]]/ { active=0 }
+    /^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$/ { active=1; found=1; next }
+    active && /^【(打磨报告|需作者确认|改动摘要)】/ { active=0; next }
     active { print }
     END { if (found != 1) exit 3 }
   ' "$1"
@@ -41,6 +48,13 @@ extract_final() {
 
 check_case() {
   [ -n "$id" ] || return 0
+  if [ "$filter_count" -gt 0 ]; then
+    case "$selected_cases" in
+      *" $id "*) ;;
+      *) return 0 ;;
+    esac
+  fi
+  checked_count=$((checked_count + 1))
   output="$RUN_DIR/${file:-${id}-output.md}"
   [ -f "$output" ] || { echo "$id: missing output $output" >&2; exit 1; }
 
@@ -63,7 +77,7 @@ check_case() {
       exit 1
     fi
   done
-  final_check_count=$(( ${#require_final_fixed[@]} + ${#forbid_final_fixed[@]} ))
+  final_check_count=$(( ${#require_final_fixed[@]} + ${#forbid_final_fixed[@]} + ${#require_final_regex[@]} + ${#forbid_final_regex[@]} ))
   set -u
 
   if [ "$final_check_count" -gt 0 ]; then
@@ -75,6 +89,15 @@ check_case() {
     for value in "${forbid_final_fixed[@]}"; do
       if grep -Fq -- "$value" <<<"$final"; then
         echo "$id: final contains forbidden text: $value" >&2
+        exit 1
+      fi
+    done
+    for value in "${require_final_regex[@]}"; do
+      grep -Eq -- "$value" <<<"$final" || { echo "$id: final missing pattern: $value" >&2; exit 1; }
+    done
+    for value in "${forbid_final_regex[@]}"; do
+      if grep -Eq -- "$value" <<<"$final"; then
+        echo "$id: final matches forbidden pattern: $value" >&2
         exit 1
       fi
     done
@@ -102,10 +125,17 @@ while IFS= read -r line || [ -n "$line" ]; do
     forbid_output_regex) forbid_output_regex+=("$value") ;;
     require_final_fixed) require_final_fixed+=("$value") ;;
     forbid_final_fixed) forbid_final_fixed+=("$value") ;;
+    require_final_regex) require_final_regex+=("$value") ;;
+    forbid_final_regex) forbid_final_regex+=("$value") ;;
     fixture|mode|request|note) ;;
     *) echo "$id: unknown eval key: $key" >&2; exit 1 ;;
   esac
 done < tests/eval-manifest.txt
 
 check_case
+[ "$checked_count" -gt 0 ] || { echo "no matching eval cases selected" >&2; exit 1; }
+if [ "$filter_count" -gt 0 ] && [ "$checked_count" -ne "$filter_count" ]; then
+  echo "one or more selected eval cases were not found" >&2
+  exit 1
+fi
 echo "captured run checks ok: $RUN_DIR"

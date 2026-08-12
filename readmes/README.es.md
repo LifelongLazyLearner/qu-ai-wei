@@ -4,7 +4,7 @@
 
 > ⚠️ **Versión 0.x en desarrollo:** Las reglas, las categorías y las interfaces todavía pueden cambiar. Puedes enviar comentarios mediante [issues](https://github.com/LifelongLazyLearner/qu-ai-wei/issues), [discussions](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) o pull requests.
 
-qu-ai-wei es un agent skill que revisa borradores generados por IA en **chino simplificado**. Hace que el texto suene más natural sin cambiar los hechos, el significado, el nivel de formalidad ni la voz del original.
+qu-ai-wei reescribe textos en **chino simplificado** que presentan patrones frecuentes de redacción de IA. Puede reorganizar oraciones, párrafos y textos largos sin cambiar los hechos, el significado, la fuerza de la evidencia, el nivel de formalidad ni la voz del original. Estos patrones sirven para editar, no para identificar al autor.
 
 El README está disponible en varios idiomas, pero el skill edita textos cuyo idioma principal es el chino simplificado. Conserva los nombres de producto, términos técnicos, abreviaturas y demás expresiones insertadas cuando son necesarias.
 
@@ -34,7 +34,7 @@ Después de instalarlo, inicia una sesión nueva o vuelve a cargar los skills se
 [pega aquí un texto en chino simplificado]
 ```
 
-En el modo normal, qu-ai-wei primero comprueba si conviene editar el texto y después entrega un borrador, una revisión, la versión final y un informe de pulido. No modifica textos que ya parecen escritos de forma natural por una persona y pregunta cuando no puede determinar el contexto o el nivel de formalidad.
+En el modo normal, qu-ai-wei comprueba la autorización y el contenido protegido, y después entrega la versión final con un informe breve. Una petición explícita de reescritura, edición, pulido, eliminación del tono de IA o uso de este skill autoriza a editar incluso un texto humano. Solo se detiene ante una voz humana cuando se proporciona texto sin ninguna instrucción de edición. Si el original ya es natural, no fuerza cambios.
 
 ## Solo el texto final
 
@@ -46,7 +46,7 @@ Usa qu-ai-wei para revisar la siguiente descripción de un PR y devuelve únicam
 [pega aquí un texto en chino simplificado]
 ```
 
-El embedded mode ejecuta las mismas comprobaciones internas. Solo devuelve el texto final cuando puede revisarlo de forma segura; si el original ya parece escrito por una persona o falta contexto, conserva el texto, pregunta o explica el bloqueo. No concede permiso para escribir archivos, hacer commits, publicar ni enviar contenido.
+El embedded mode ejecuta las mismas comprobaciones internas. Solo devuelve el texto final cuando puede revisarlo de forma segura; si falta autorización o contexto, conserva el texto, pregunta o explica el bloqueo. No concede permiso para escribir archivos, hacer commits, publicar ni enviar contenido.
 
 ## Límites
 

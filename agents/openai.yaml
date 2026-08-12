@@ -1,4 +1,4 @@
 interface:
   display_name: "去 AI 味"
-  short_description: "去除简体中文 AI 写作痕迹，同时保留事实、原意和语体"
-  default_prompt: "Use $qu-ai-wei to make this Simplified Chinese draft sound natural while preserving its facts, meaning, register, and voice."
+  short_description: "重写简体中文的 AI 高频写作症状，保留事实、逻辑和声口"
+  default_prompt: "Use $qu-ai-wei to rewrite this Simplified Chinese text naturally, including its sentence and article structure, while preserving facts, evidence strength, register, and voice."

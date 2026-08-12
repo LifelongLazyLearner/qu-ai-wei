@@ -1,14 +1,14 @@
 # 小型人工盲评
 
-这个 benchmark 比较两个版本的实际输出，不把旧输出当标准答案。评分人看到原文、请求和随机化后的 A / B，不知道哪份来自基线或候选版本。
+这个 benchmark 比较两个版本的实际输出，不把旧输出当标准答案。评分人看到原文、请求和随机化后的 A / B，不知道哪份来自基线或候选版本。普通模式展示终稿正文；若输出含 `【需作者确认】`，该区块也随终稿展示，以便评价占位符、引用与逻辑风险是否正确交付。`【打磨报告】` 不进入盲评。
 
 ## 准备输出
 
-在相同模型、相同设置、彼此隔离的干净会话里，分别用基线和候选 skill 运行 `tests/eval-manifest.txt` 的 01–06。把输出保存为：
+在相同模型、相同设置、彼此隔离的干净会话里，分别运行 `tests/eval-manifest.txt` 中除敏感信息样本 07 外的全部案例。把输出保存为：
 
 ```text
-<baseline-dir>/01-output.md ... 06-output.md
-<candidate-dir>/01-output.md ... 06-output.md
+<baseline-dir>/01-output.md ... 15-output.md（不含 07）
+<candidate-dir>/01-output.md ... 15-output.md（不含 07）
 ```
 
 安全样本 07 用 `tests/check-runs.sh` 做通过 / 失败检查，不进入文风盲评。
@@ -29,7 +29,7 @@ python3 tests/blind-review/prepare.py \
 脚本生成：
 
 - `review.md`：交给评分人，只含原文和 A / B。
-- `answer-key.json`：3:3 平衡的版本映射、skill 文件摘要及模型 / 设置记录，评分结束前不要打开。
+- `answer-key.json`：尽量平衡的版本映射、skill 文件摘要及模型 / 设置记录，评分结束前不要打开。
 
 每个案例分别判断：
 

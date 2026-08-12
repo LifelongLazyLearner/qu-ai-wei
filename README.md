@@ -9,7 +9,7 @@
 
 > ⚠️ **0.x 开发版：** qu-ai-wei 仍在迭代，规则、分类、调用方式和输出格式都可能变动。最新发布版本见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)；欢迎提 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) 或 PR 反馈。
 
-qu-ai-wei 用来修改 AI 生成的简体中文初稿，让文字读起来更自然，同时保留原来的事实、意思、正式程度和说话方式。
+qu-ai-wei 用来改写带有 AI 高频写作症状的简体中文，让文字更符合自然的中文表达，同时保留事实、原意、证据强度、正式程度和作者声口。它可以重组句子、段落和长文结构，不把这些症状当作作者身份鉴定。
 
 它会清理套话、机械结构、翻译腔和过度工整的表达，但不会：
 
@@ -24,9 +24,9 @@ qu-ai-wei 用来修改 AI 生成的简体中文初稿，让文字读起来更自
 
 **原文：** 在快速变化的时代背景下，团队围绕提质增效开展了系统化实践。值得一提的是，本季度发布了 3 个版本，修复了 17 个线上问题，进一步赋能了组织协同。
 
-**终稿：** 本季度，团队发布了 3 个版本，修复了 17 个线上问题。
+**终稿：** 团队本季度围绕提质增效开展了系统化实践，发布 3 个版本，修复了 17 个线上问题。
 
-这里删掉了没有增加信息的背景、强调和口号，没有补写原文未说明的措施或效果。更多边界案例见 [`references/examples.md`](./references/examples.md)。
+这里删掉了没有增加信息的背景、强调和口号，同时保留「系统化实践」这个原有判断，也没有补写原文未说明的措施或效果。更多边界案例见 [`references/examples.md`](./references/examples.md)。
 
 ## 安装
 
@@ -58,7 +58,7 @@ npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a clau
 [粘贴简体中文]
 ```
 
-qu-ai-wei 会先判断这段文字是否该改，然后给出初稿、自审、终稿和打磨报告。如果原文已经是自然的真人文本，它会停手；如果事实不清，或它无法判断这段文字该用在什么场合、该有多正式，它会先提问。
+qu-ai-wei 会先判断编辑授权与保护边界，再给出终稿和简短打磨报告。明确要求改写、重写、润色、去 AI 味或使用本 skill 处理时，即使是本人文字也可以编辑；只有用户仅贴出文本、没有给出编辑指令时，明显的个人声口才会触发停手。长文会先梳理事实、论证和段落职责，再重组全文；原文已经自然时不会强行修改。
 
 不要粘贴密码、API key 或其他凭证；检测到疑似凭证时，qu-ai-wei 会停止并要求先脱敏。
 
@@ -72,6 +72,6 @@ qu-ai-wei 会先判断这段文字是否该改，然后给出初稿、自审、�
 [粘贴简体中文]
 ```
 
-它仍会核对事实，并判断原文是否该改、该有多正式。能安全改写时，它只返回终稿；遇到真人文本或信息不足，仍会停手或提问。它不会因此获得写文件、commit、发布或发送内容的权限。
+它仍会核对事实、逻辑、受保护片段和目标语体。能安全改写时只返回终稿；授权不清或信息不足时仍会停手或提问。它不会因此获得写文件、commit、发布或发送内容的权限。
 
 完整执行规则见 [`SKILL.md`](./SKILL.md)。方法受 [humanizer](https://github.com/blader/humanizer) 启发，中文翻译腔规则参考 [yage.ai](https://yage.ai/share/ai-chinese-translationese-20260418.html)。本项目采用 [MIT License](./LICENSE)。

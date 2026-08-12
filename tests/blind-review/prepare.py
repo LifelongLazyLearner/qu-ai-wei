@@ -11,9 +11,9 @@ import re
 from pathlib import Path
 
 
-CASE_IDS = ("01", "02", "03", "04", "05", "06")
-SECTION_END = re.compile(r"^(?:【(?:打磨报告|改动摘要)】|#{2,6}\s+)")
-FINAL_START = re.compile(r"^#{2,6}\s*终稿\s*$")
+CASE_IDS = ("01", "02", "03", "04", "05", "06", "08", "09", "10", "11", "12", "13", "14", "15")
+SECTION_END = re.compile(r"^【(?:打磨报告|需作者确认|改动摘要)】")
+FINAL_START = re.compile(r"^(?:#{2,6}\s*)?终稿\s*$")
 
 
 def sha256(text: str) -> str:
@@ -58,7 +58,21 @@ def review_text(output: str, mode: str) -> str:
         if SECTION_END.match(line):
             break
         selected.append(line)
-    text = "\n".join(selected).strip()
+    confirmation: list[str] = []
+    confirmation_start = next(
+        (index for index, line in enumerate(lines) if line.strip() == "【需作者确认】"),
+        None,
+    )
+    if confirmation_start is not None:
+        confirmation.append("【需作者确认】")
+        for line in lines[confirmation_start + 1 :]:
+            if re.match(r"^【(?:打磨报告|改动摘要)】", line):
+                break
+            confirmation.append(line)
+    parts = ["\n".join(selected).strip()]
+    if confirmation:
+        parts.append("\n".join(confirmation).strip())
+    text = "\n\n".join(part for part in parts if part)
     return text or output.strip()
 
 
@@ -83,7 +97,11 @@ def build_packet(args: argparse.Namespace) -> None:
         "不要查看同目录的 `answer-key.json`，直到所有评分完成。",
         "",
     ]
-    candidate_a = set(rng.sample(CASE_IDS, len(CASE_IDS) // 2))
+    case_ids = tuple(args.cases) if args.cases else CASE_IDS
+    unknown_cases = sorted(set(case_ids) - set(CASE_IDS))
+    if unknown_cases:
+        raise SystemExit(f"unknown case ids: {', '.join(unknown_cases)}")
+    candidate_a = set(rng.sample(case_ids, len(case_ids) // 2))
     key: dict[str, object] = {
         "seed": args.seed,
         "provenance": {
@@ -95,7 +113,7 @@ def build_packet(args: argparse.Namespace) -> None:
         "cases": {},
     }
 
-    for case_id in CASE_IDS:
+    for case_id in case_ids:
         case = manifest.get(case_id)
         if not case:
             raise SystemExit(f"manifest missing case {case_id}")
@@ -161,6 +179,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--settings", required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=20260804)
+    parser.add_argument("--cases", nargs="+", choices=CASE_IDS)
     return parser.parse_args()
 
 

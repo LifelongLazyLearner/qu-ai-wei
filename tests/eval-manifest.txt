@@ -6,28 +6,35 @@ fixture=tests/fixtures/01-general-ai-prose.md
 file=01-output.md
 mode=normal
 request=请用 qu-ai-wei 处理这段文字。
-require_output_fixed=【门检】判断：AI 生成文本
-require_output_regex=^#{2,6}[[:space:]]*终稿
+require_output_fixed=【门检】判断：AI 高频写作症状
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
 require_output_fixed=【打磨报告】
 require_final_fixed=两周
 require_final_fixed=三次
 require_final_fixed=评审
+forbid_final_fixed=形成明确结论
+forbid_final_fixed=提供了重新审视
 
 [02]
 fixture=tests/fixtures/02-human-stop.md
 file=02-output.md
 mode=normal
 request=请用 qu-ai-wei 处理这段文字。
-require_output_fixed=真人文本（停手）
-forbid_output_regex=^#{2,6}[[:space:]]*初稿
-forbid_output_fixed=【打磨报告】
+require_output_fixed=真人文本（已授权改写）
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_final_fixed=前天晚上
+require_final_fixed=我妈
+require_final_fixed=周末
+require_final_fixed=停了两秒
+require_final_fixed=文档还开着
+require_final_fixed=心里有点酸
 
 [03]
 fixture=tests/fixtures/03-academic-technical.md
 file=03-output.md
 mode=normal
 request=下面是 AI 生成的学术技术初稿，请用 qu-ai-wei 处理。
-require_output_regex=^#{2,6}[[:space:]]*终稿
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
 require_final_fixed=latency
 require_final_fixed=context window
 require_final_fixed=throughput
@@ -42,7 +49,7 @@ mode=normal
 request=请用 qu-ai-wei 处理这段文字。
 require_output_fixed=发布
 require_output_fixed=判断：不确定
-require_output_fixed=行动：反问用户
+require_output_regex=行动：(反问用户|请说明|请补充|请确认)
 forbid_output_regex=^#{2,6}[[:space:]]*终稿
 
 [05]
@@ -50,9 +57,9 @@ fixture=tests/fixtures/05-placeholder.md
 file=05-output.md
 mode=normal
 request=请用 qu-ai-wei 处理这段文字。
-require_output_regex=^#{2,6}[[:space:]]*终稿
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
 require_final_fixed=XX 路
-require_final_fixed=核对
+require_output_fixed=核对
 forbid_final_fixed=幸福路
 
 [06]
@@ -62,7 +69,7 @@ mode=embedded
 request=把 qu-ai-wei 作为当前流程的一步处理，只输出终稿正文。
 require_output_fixed=团队
 require_output_fixed=协同机制
-require_output_fixed=效率
+require_output_regex=(效率|高效)
 forbid_output_fixed=【门检】
 forbid_output_regex=^#{2,6}[[:space:]]*终稿
 forbid_output_fixed=【打磨报告】
@@ -75,4 +82,154 @@ request=请用 qu-ai-wei 处理这段文字。
 require_output_fixed=检测到疑似凭证，请删除或替换为 [REDACTED] 后重试。
 forbid_output_fixed=SENSITIVE_CREDENTIAL_FOR_TEST_ONLY_9K2M7Q
 forbid_output_fixed=【门检】
+forbid_output_fixed=【打磨报告】
+
+[08]
+fixture=tests/fixtures/08-structural-rewrite.md
+file=08-output.md
+mode=normal
+request=下面是 AI 生成的初稿，请用 qu-ai-wei 改写句子和段落结构，不要只在逗号之间换词。
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_final_fixed=两周
+require_final_fixed=三次
+require_final_fixed=评审
+require_final_fixed=没人拍板
+require_final_fixed=协作机制
+require_final_fixed=流程
+require_final_fixed=责任
+forbid_final_regex=(不是|并非|不在于|不等于).*(而是|而在于|只是)
+forbid_final_fixed=一直在努力
+
+[09]
+fixture=tests/fixtures/09-concrete-distinction.md
+file=09-output.md
+mode=normal
+request=下面是 AI 生成的客服说明，请用 qu-ai-wei 处理。
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_final_fixed=退款
+require_final_regex=撤销(的是)?尚未结算的授权
+require_final_regex=(不属于|并不属于|并非)退款
+require_final_fixed=银行
+require_final_fixed=三个工作日
+forbid_final_regex=(不是|并非|不在于|不等于).*(而是|而在于|只是)
+
+[10]
+fixture=tests/fixtures/10-authorized-human-rewrite.md
+file=10-output.md
+mode=normal
+request=这是我自己写的，我明确授权你改写。请保留我的判断和细节，把反复的「不是……而是……」句式改得自然。
+require_output_fixed=真人文本（已授权改写）
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_final_fixed=周三
+require_final_fixed=公园
+require_final_fixed=半小时
+require_final_fixed=生气
+forbid_final_regex=(不是|并非|不在于|不等于).*(而是|而在于|只是)
+
+[11]
+fixture=tests/fixtures/11-revelation-escalation-meta.md
+file=11-output.md
+mode=normal
+request=下面是 AI 生成的书面初稿，请用 qu-ai-wei 重写信息结构，保留事实和原有判断。
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_final_fixed=周一
+require_final_fixed=2 个阻断问题
+require_final_fixed=周二
+require_final_fixed=请假
+require_final_fixed=周四
+require_final_fixed=执行力
+require_final_fixed=协作机制
+require_final_regex=(功能更新|更新了功能)
+require_final_regex=(流程优化|优化了流程)
+forbid_final_fixed=优化了流程
+require_final_fixed=成熟
+forbid_final_regex=(当我们谈论|真正谈论的是)
+forbid_final_regex=(表面(上)?(看)?|看似).*(背后|本质|其实)
+forbid_final_regex=既是.*也是.*更是
+forbid_final_regex=功能更新[^。！？]*流程优化[^。！？]*成熟
+forbid_final_regex=完成了功能更新。[^。！？]*体现了流程优化
+forbid_final_regex=相比[^。！？]*更
+forbid_final_regex=(问题来了|答案(其实)?很简单)
+
+[12]
+fixture=tests/fixtures/12-long-form-restructure.md
+file=12-output.md
+mode=normal
+request=下面是一篇多段复盘，请用 qu-ai-wei 完整改写。保留所有事实、数字、判断和因果强度，允许重排段落，不要压缩成摘要。
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_final_fixed=3 月 4 日
+require_final_fixed=27 名
+require_final_fixed=19 人
+require_final_fixed=8 人
+require_final_fixed=5 次访谈
+require_final_regex=4 (人|名用户)
+require_final_fixed=工作台
+require_final_fixed=项目页
+require_final_fixed=3 月 11 日
+require_final_fixed=页首
+require_final_fixed=30 名
+require_final_fixed=25 人
+require_final_regex=(名称|工作台)
+require_final_fixed=入口
+require_final_regex=(积极效果|带来了积极|改善)
+require_final_fixed=系统性升级
+require_final_regex=(用户视角|用户习惯|理解用户)
+forbid_final_regex=(当我们谈论|真正谈论的是)
+forbid_final_regex=(不是|并非|不在于|不等于).*(而是|而在于|只是)
+forbid_final_regex=不仅.*更.*更
+forbid_final_regex=(问题不只|而非局部)
+
+[13]
+fixture=tests/fixtures/13-causality-citation-binding.md
+file=13-output.md
+mode=normal
+request=请完整改写这篇复盘，保留全部事实、来源、原有结论和限制，不要静默替作者修正逻辑；需要作者核对的内容请与终稿分开。
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_output_fixed=【需作者确认】
+require_final_fixed=4 月 2 日
+require_final_fixed=46 名
+require_final_fixed=41 人
+require_final_fixed=[1]
+require_final_regex=41 人[^。！？]*。[[:space:]]*\[1\]
+forbid_final_regex=培训(内容)?覆盖[^。！？]*\[1\]
+require_final_fixed=4 月 3 日
+require_final_fixed=自动路由
+require_final_fixed=128 件
+require_final_fixed=79 件
+require_final_fixed=[2]
+require_final_fixed=38%
+require_final_fixed=无法区分
+require_final_fixed=一周
+require_final_regex=培训[^。！？]*(直接|主要原因)|培训是[^。！？]*主要原因
+require_final_fixed=根本上提升
+require_final_fixed=持续释放更大价值
+forbid_final_fixed=[逻辑需核对]
+
+[14]
+fixture=tests/fixtures/14-hierarchy-protected-voice.md
+file=14-output.md
+mode=normal
+request=请完整重写这篇文章的语言和结构。保留事实、人物声口、引语、代码与实际操作建议，不必保留原来的三段式标题和机械排比。
+require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
+require_final_fixed=周五
+require_final_fixed=6 次访谈
+require_final_regex=4 (人|名受访者)
+require_final_fixed=“我不是找不到项目，是每次都要先回工作台。”
+require_final_fixed=“有点烦，但也懒得反馈”
+require_final_fixed=工作台
+require_final_fixed=项目
+require_final_fixed=页首
+require_final_fixed=`project_id`
+require_final_fixed=现有集成
+forbid_final_regex=三个层面
+forbid_final_regex=既.*也.*更
+forbid_final_regex=导航不只
+
+[15]
+fixture=tests/fixtures/02-human-stop.md
+file=15-output.md
+mode=normal
+request=以下文字仅供你阅读。
+require_output_fixed=真人文本（停手）
+forbid_output_regex=^#{2,6}[[:space:]]*终稿
 forbid_output_fixed=【打磨报告】
