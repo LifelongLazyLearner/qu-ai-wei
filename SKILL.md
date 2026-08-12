@@ -2,9 +2,6 @@
 name: qu-ai-wei
 description: |
   Rewrite and humanize Simplified Chinese while preserving facts, meaning, evidence strength, register, and authorial voice. 用于 `/qu-ai-wei`、「去 AI 味」「改得说人话」「humanize 中文」「改自然点」「改写 / 重写这段中文」「润色得自然些」「太生硬了」等请求，包括段落、文章与长文的结构重写。不要用于翻译、新写中文、只查错别字、繁體中文，或未经授权替真人更换声口。
-license: MIT
-metadata:
-  version: "0.9.0"
 ---
 
 # 去 AI 味（qu-ai-wei）
@@ -37,6 +34,8 @@ metadata:
 - 用户给出的具体范围高于上述默认值。
 
 先检查自纠、犹疑、自嘲、方言、个人句法、当事人细节或访谈声口。用户明确要求改写、重写、润色、去 AI 味，或要求「用 qu-ai-wei 处理」这份文字，即已授权编辑，即使文字看起来由真人所写。只有用户仅提供文本、没有给出任何编辑指令时，真人文本保持原样。授权编辑不等于全面换声口。
+
+授权编辑也不等于目标语体已经明确。若同一原文用于品牌官网、自媒体、客服、内部材料等场景会产生不同成稿，而用户没有提供足以判定的用途，普通模式输出 `判断：不确定` 并询问会发布在哪里，不得自行补出品牌主体、发布渠道或叙述身份。
 
 命中「真人文本（停手）」时立即结束：普通模式只输出门检和简短停手说明，不另设终稿或打磨报告；内嵌模式只返回原文。不要先复制全文，再把它包装成“无需改写”的终稿。
 
@@ -130,7 +129,6 @@ metadata:
 
 ## 按需参考
 
-- 对领域术语的含义或边界拿不准：读 [`CONTEXT.md`](CONTEXT.md)；运行规则仍以本文件为准。
 - 诊断任何 AI 高频写作症状：读 [`references/pattern-catalog.md`](references/pattern-catalog.md)。
 - 判断受保护结构、术语、引语、列表、标点或事实边界：读 [`references/editing-boundaries.md`](references/editing-boundaries.md)。
 - 品牌广告与自媒体难分，或处理品牌文案：读 [`references/brand-voice.md`](references/brand-voice.md)。

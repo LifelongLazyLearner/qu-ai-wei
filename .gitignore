@@ -1,8 +1,14 @@
 # Local agent and generated evaluation state
 AGENTS.md
 .claude/
+docs/research/
 tests/runs/
+tmp/
 assets/social-preview.png
+
+# Python caches
+__pycache__/
+*.py[cod]
 
 # Local secrets and OS metadata
 .env

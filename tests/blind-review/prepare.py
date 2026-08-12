@@ -11,8 +11,10 @@ import re
 from pathlib import Path
 
 
-CASE_IDS = ("01", "02", "03", "04", "05", "06", "08", "09", "10", "11", "12", "13", "14", "15")
-SECTION_END = re.compile(r"^【(?:打磨报告|需作者确认|改动摘要)】")
+CASE_IDS = ("01", "02", "03", "04", "05", "06", "08", "09", "10", "11", "12", "13", "14", "15", "16")
+SECTION_END = re.compile(r"^(?:【(?:打磨报告|需作者确认|改动摘要)】|#{1,6}\s*(?:打磨报告|需作者确认|改动摘要|自审)\s*)$")
+CONFIRMATION_START = re.compile(r"^(?:【需作者确认】|#{1,6}\s*需作者确认\s*)$")
+REPORT_START = re.compile(r"^(?:【(?:打磨报告|改动摘要)】|#{1,6}\s*(?:打磨报告|改动摘要|自审)\s*)$")
 FINAL_START = re.compile(r"^(?:#{2,6}\s*)?终稿\s*$")
 
 
@@ -59,14 +61,11 @@ def review_text(output: str, mode: str) -> str:
             break
         selected.append(line)
     confirmation: list[str] = []
-    confirmation_start = next(
-        (index for index, line in enumerate(lines) if line.strip() == "【需作者确认】"),
-        None,
-    )
+    confirmation_start = next((index for index, line in enumerate(lines) if CONFIRMATION_START.match(line)), None)
     if confirmation_start is not None:
         confirmation.append("【需作者确认】")
         for line in lines[confirmation_start + 1 :]:
-            if re.match(r"^【(?:打磨报告|改动摘要)】", line):
+            if REPORT_START.match(line):
                 break
             confirmation.append(line)
     parts = ["\n".join(selected).strip()]

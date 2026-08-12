@@ -8,13 +8,13 @@
 bash tests/validate.sh
 ```
 
-它检查必需文件、参考文件路由、触发词锚点、十五个评测样本、版本与发布约束，以及 `skills` CLI 能否发现本 skill。CI 运行同一条命令。
+它检查必需文件、参考文件路由、触发词锚点、十六个评测样本、版本与发布约束，以及 `skills` CLI 能否发现本 skill。CI 运行同一条命令。
 
 ## 行为回归
 
 1. 新建一个不带本仓库讨论记录的干净会话。
 2. 按 `tests/eval-manifest.txt` 的 `request` 处理对应 `fixture`。
-3. 把十五份输出保存到本地 `tests/runs/<版本-模型>/`，文件名取清单中的 `file` 值。
+3. 把十六份输出保存到本地 `tests/runs/<版本-模型>/`，文件名取清单中的 `file` 值。
 4. 运行：
 
 ```bash

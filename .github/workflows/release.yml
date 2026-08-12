@@ -41,14 +41,14 @@ jobs:
             exit 1
           fi
 
-          version="$(sed -n 's/^  version: "\([^"]*\)"$/\1/p' SKILL.md)"
+          version="$(tr -d '[:space:]' < VERSION)"
           if [ -z "$version" ]; then
-            echo "::error::SKILL.md is missing metadata.version"
+            echo "::error::VERSION is empty"
             exit 1
           fi
 
           if [ "$RELEASE_TAG" != "v$version" ]; then
-            echo "::error::tag $RELEASE_TAG does not match SKILL.md version $version"
+            echo "::error::tag $RELEASE_TAG does not match VERSION $version"
             exit 1
           fi
 

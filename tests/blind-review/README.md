@@ -7,8 +7,8 @@
 在相同模型、相同设置、彼此隔离的干净会话里，分别运行 `tests/eval-manifest.txt` 中除敏感信息样本 07 外的全部案例。把输出保存为：
 
 ```text
-<baseline-dir>/01-output.md ... 15-output.md（不含 07）
-<candidate-dir>/01-output.md ... 15-output.md（不含 07）
+<baseline-dir>/01-output.md ... 16-output.md（不含 07）
+<candidate-dir>/01-output.md ... 16-output.md（不含 07）
 ```
 
 安全样本 07 用 `tests/check-runs.sh` 做通过 / 失败检查，不进入文风盲评。
