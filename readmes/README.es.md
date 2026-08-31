@@ -1,18 +1,14 @@
 # qu-ai-wei
 
-[简体中文](../README.md) | [English](./README.en.md) | [日本語](./README.ja.md) | [한국어](./README.ko.md) | Español
+[简体中文](../README.md) · [English](./README.en.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · Español
 
-> ⚠️ **Versión 0.x en desarrollo:** Las reglas, las categorías y las interfaces todavía pueden cambiar. Puedes enviar comentarios mediante [issues](https://github.com/LifelongLazyLearner/qu-ai-wei/issues), [discussions](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) o pull requests.
+**Reescribe un texto en el mismo idioma y conserva los hechos, la lógica, el registro y la voz.**
 
-qu-ai-wei reescribe textos en **chino simplificado** que presentan patrones frecuentes de redacción de IA. Puede reorganizar oraciones, párrafos y textos largos sin cambiar los hechos, el significado, la fuerza de la evidencia, el nivel de formalidad ni la voz del original. Estos patrones sirven para editar, no para identificar al autor.
+qu-ai-wei reescribe un texto en su idioma original. Puede reorganizar frases, párrafos, títulos y textos largos, pero conserva los hechos, cifras, citas, grado de certeza, formato y voz del autor.
 
-El README está disponible en varios idiomas, pero el skill edita textos cuyo idioma principal es el chino simplificado. Conserva los nombres de producto, términos técnicos, abreviaturas y demás expresiones insertadas cuando son necesarias.
+El chino simplificado y el inglés tienen reglas propias. El chino tradicional, el español, el japonés y los demás idiomas parten de un núcleo común y se ajustan después a la gramática, el contexto de publicación y las muestras del autor.
 
-## Demostración
-
-![qu-ai-wei elimina fórmulas vacías y conserva los hechos de un borrador en chino simplificado](../assets/demo.gif)
-
-El ejemplo elimina una introducción genérica, una fórmula enfática innecesaria y un eslogan, pero conserva los dos hechos del original. Los límites de edición se explican en [`references/examples.md`](../references/examples.md).
+![qu-ai-wei elimina fórmulas vacías de un texto chino y conserva los hechos](../assets/demo.gif)
 
 ## Instalación
 
@@ -22,34 +18,40 @@ Con Node.js y npm instalados, ejecuta:
 npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
 ```
 
-El `skills` CLI externo detectará las herramientas de programación con IA compatibles instaladas en el equipo.
+Después, abre una sesión nueva o vuelve a cargar los skills según la herramienta que uses.
 
 ## Uso
 
-Después de instalarlo, inicia una sesión nueva o vuelve a cargar los skills según las instrucciones de tu herramienta. A continuación, escribe:
-
 ```text
-/qu-ai-wei
+Usa qu-ai-wei para que este texto suene natural en español. Conserva todos los hechos y devuelve solo el texto final:
 
-[pega aquí un texto en chino simplificado]
+[pega aquí el texto]
 ```
 
-En el modo normal, qu-ai-wei comprueba la autorización y el contenido protegido, y después entrega la versión final con un informe breve. Una petición explícita de reescritura, edición, pulido, eliminación del tono de IA o uso de este skill autoriza a editar incluso un texto humano. Solo se detiene ante una voz humana cuando se proporciona texto sin ninguna instrucción de edición. Si el original ya es natural, no fuerza cambios.
+El idioma del original se mantiene por defecto. Si el trabajo incluye una traducción, traduce primero y usa qu-ai-wei sobre el texto traducido.
 
-## Solo el texto final
+## En qué se fija
 
-Si qu-ai-wei forma parte de un flujo de trabajo más amplio, solicita el embedded mode:
+Primero registra los hechos, las afirmaciones, las personas gramaticales, las citas, el código, las rutas, los enlaces y los datos legibles por máquina que debe conservar. Luego comprueba qué función cumple cada párrafo. Las palabras y la puntuación llegan al final.
 
-```text
-Usa qu-ai-wei para revisar la siguiente descripción de un PR y devuelve únicamente el texto final:
+Las reglas compartidas están en [`cross-language-core.md`](../references/cross-language-core.md). El inglés y el chino simplificado añaden sus propias capas. La narrativa, las notas de versión, los PR, las incidencias y los informes técnicos siguen guías específicas para su contexto.
 
-[pega aquí un texto en chino simplificado]
-```
+Así, una costumbre del inglés no se convierte en una prohibición universal para todos los idiomas.
 
-El embedded mode ejecuta las mismas comprobaciones internas. Solo devuelve el texto final cuando puede revisarlo de forma segura; si falta autorización o contexto, conserva el texto, pregunta o explica el bloqueo. No concede permiso para escribir archivos, hacer commits, publicar ni enviar contenido.
+## Revisión estricta
 
-## Límites
+Cuando el encargo pide una limpieza a fondo, o el texto es el README o la documentación de un humanizer, qu-ai-wei revisa uno por uno los adverbios, las pasivas, las rayas y los ritmos enfáticos. El texto final conserva los elementos que aportan tiempo, grado, evidencia, responsabilidad, gramática, ritmo o voz.
 
-qu-ai-wei no traduce ni escribe desde cero, no inventa opiniones o detalles ausentes, no sustituye la voz propia de una persona y no ayuda a eludir políticas sobre el uso de IA.
+## Entrega y alcance
 
-Consulta [SKILL.md](../SKILL.md) para ver todas las reglas de ejecución. El método se inspira en [humanizer](https://github.com/blader/humanizer), y las reglas sobre calcos del inglés en chino toman como referencia [yage.ai](https://yage.ai/share/ai-chinese-translationese-20260418.html). Publicado bajo la [Licencia MIT](../LICENSE).
+El modo normal devuelve el texto revisado con una nota breve. El modo integrado entrega solo el texto final. El modo archivo edita la prosa autorizada y conserva bloques de código, frontmatter, comandos, identificadores, rutas, destinos de enlaces y datos.
+
+qu-ai-wei se ocupa de revisar textos existentes sin cambiar de idioma. La traducción, la redacción desde cero, la corrección ortográfica aislada y la identificación del autor o del modelo son tareas distintas. Los hechos, opiniones, experiencias y juicios profesionales del resultado proceden del original o de materiales autorizados por el usuario.
+
+Sustituye las credenciales por `[REDACTED]` antes de compartir el texto. En centros educativos, revistas, plataformas y empresas, sigue las normas de divulgación y uso de IA que correspondan.
+
+## Método y licencia
+
+El método toma ideas de [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), [Humanizer](https://github.com/blader/humanizer), [Humanizer-zh](https://github.com/op7418/Humanizer-zh), [Sepia](https://github.com/Nanako0129/sepia), [stop-slop](https://github.com/hardikpandya/stop-slop) y [claudish-to-english](https://github.com/gvzdv/claudish-to-english). Cada señal se comprueba en el texto concreto antes de editar.
+
+Las reglas completas están en [SKILL.md](../SKILL.md). Publicado con [licencia MIT](../LICENSE).

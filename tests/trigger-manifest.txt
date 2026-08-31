@@ -40,7 +40,7 @@ note=翻译不属于本 skill
 [08]
 query=帮我新写一段产品介绍
 expect=EXCLUDE
-anchor=新写中文
+anchor=新写内容
 note=新写不属于本 skill
 
 [09]
@@ -51,6 +51,22 @@ note=纯校对不属于本 skill
 
 [10]
 query=把这段繁體中文改得更自然
-expect=EXCLUDE
+expect=TRIGGER
 anchor=繁體中文
-note=繁體中文不属于本 skill
+note=繁體中文走同语言共同内核
+
+[11]
+query=Humanize this paragraph in English
+expect=TRIGGER
+anchor=humanize this
+
+[12]
+query=Make this sound less AI
+expect=TRIGGER
+anchor=make this sound less AI
+
+[13]
+query=判断这段是谁写的、用了什么模型
+expect=EXCLUDE
+anchor=作者或模型鉴定
+note=作者鉴定与模型识别属于其他任务

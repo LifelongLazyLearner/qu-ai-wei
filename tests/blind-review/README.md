@@ -7,8 +7,8 @@
 在相同模型、相同设置、彼此隔离的干净会话里，分别运行 `tests/eval-manifest.txt` 中除敏感信息样本 07 外的全部案例。把输出保存为：
 
 ```text
-<baseline-dir>/01-output.md ... 16-output.md（不含 07）
-<candidate-dir>/01-output.md ... 16-output.md（不含 07）
+<baseline-dir>/01-output.md ... 23-output.md（不含 07）
+<candidate-dir>/01-output.md ... 23-output.md（不含 07）
 ```
 
 安全样本 07 用 `tests/check-runs.sh` 做通过 / 失败检查，不进入文风盲评。
@@ -38,4 +38,4 @@ python3 tests/blind-review/prepare.py \
 3. **自然度**：AI 套话、翻译腔和机械结构是否减少。
 4. **克制**：有没有把真人表达、术语或必要结构过度清洗。
 
-四项各打 1–5 分，再选 `A`、`B` 或 `平局`，并写一句能指向具体文本的理由。至少两名评分人独立完成；评分结束后再用 `answer-key.json` 解盲。版本只有在事实与原意不退步，且自然度或克制有稳定改善时才算更好。
+四项各打 1–5 分，再选 `A`、`B` 或 `平局`，并写一句能指向具体文本的理由。至少两名评分人独立完成；评分结束后再用 `answer-key.json` 解盲。候选输出需要守住事实与原意，并在自然度或克制上取得稳定改善。

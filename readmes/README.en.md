@@ -1,18 +1,14 @@
 # qu-ai-wei
 
-[简体中文](../README.md) | English | [日本語](./README.ja.md) | [한국어](./README.ko.md) | [Español](./README.es.md)
+[简体中文](../README.md) · English · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Español](./README.es.md)
 
-> ⚠️ **0.x development release:** Rules, categories, and interfaces may still change. Feedback is welcome through [issues](https://github.com/LifelongLazyLearner/qu-ai-wei/issues), [discussions](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions), or pull requests.
+**Revise existing prose in the same language while preserving facts, logic, register, and voice.**
 
-qu-ai-wei rewrites **Simplified Chinese** that shows common AI-writing symptoms while preserving facts, meaning, evidence strength, formality, and the source voice. It can reorganize sentences, paragraphs, and long-form structure; the symptoms are editing signals, not proof of authorship.
+qu-ai-wei rewrites existing prose in the same language. It can reshape sentences, paragraphs, headings, and long-form structure while keeping the facts, numbers, quotations, strength of evidence, formatting, and the writer's voice.
 
-This README is available in several languages, but the skill itself edits prose whose primary language is Simplified Chinese. Necessary product names, technical terms, abbreviations, and other embedded terms are preserved.
+Simplified Chinese and English have dedicated editing layers. Traditional Chinese, Spanish, Japanese, and other languages use a shared cross-language core, then follow the grammar, venue, and writer samples available for that language.
 
-## See It Work
-
-![qu-ai-wei removes boilerplate while preserving the facts in a Simplified Chinese draft](../assets/demo.gif)
-
-The example removes a generic opening, an unnecessary emphasis cue, and a slogan while preserving the two stated facts. See [`references/examples.md`](../references/examples.md) for the editing boundaries behind the example.
+![qu-ai-wei removes boilerplate from Chinese prose while keeping the stated facts](../assets/demo.gif)
 
 ## Install
 
@@ -22,34 +18,40 @@ With Node.js and npm installed, run:
 npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
 ```
 
-The external `skills` CLI detects supported AI coding tools installed on your computer.
+Start a new session after installation, or reload skills as required by your tool.
 
-## Use
-
-After installation, start a new session or reload skills as required by your tool, then ask:
+## Use it
 
 ```text
-/qu-ai-wei
+Use qu-ai-wei to humanize this in English. Keep every fact and return only the final text:
 
-[paste Simplified Chinese text]
+[paste text]
 ```
 
-By default, qu-ai-wei checks editing authority and protected content, then returns a final version with a short polishing report. An explicit request to rewrite, edit, polish, humanize, or use this skill authorizes editing even when the text is human-written. It stops for human voice only when text is supplied without an editing instruction, and it does not force changes when the source already reads naturally.
+The source language stays in place by default. For a translated piece, translate first and run qu-ai-wei on the translation.
 
-## Final Text Only
+## What it pays attention to
 
-When qu-ai-wei is one step inside a larger workflow, request embedded mode:
+The skill first records the facts, claims, speaker roles, quotations, code, paths, links, and machine-readable text that the revision must preserve. It then identifies the purpose of each paragraph. Surface edits come last.
 
-```text
-Use qu-ai-wei to revise the following PR description. Return only the final text:
+The shared rules live in [`cross-language-core.md`](../references/cross-language-core.md). English adds its own checks for inflated verb phrases, trailing participles, hidden actors, nominalization, vocabulary clusters, hedging, and typography in [`english-patterns.md`](../references/english-patterns.md). Narrative and professional writing use separate venue guides.
 
-[paste Simplified Chinese text]
-```
+This separation keeps English habits in English. An `-ing` phrase, article, passive construction, or em dash does not become a universal rule for every language.
 
-Embedded mode runs the same checks. When a safe revision is possible, it exposes only the final text; when authority or necessary context is missing, it returns the source unchanged, asks a question, or reports the block. It does not grant permission to write files, commit, publish, or send anything.
+## Strict pass
 
-## Boundaries
+When the request calls for aggressive cleanup, or the text is a humanizer README or skill document, qu-ai-wei audits every adverb, passive construction, dash, and performative beat. The final text retains constructions that contribute time, degree, evidence, responsibility, grammar, rhythm, or the writer's voice.
 
-qu-ai-wei does not translate or write from scratch, invent missing opinions or details, rewrite a person's established voice, or help bypass AI-use policies.
+## Output and scope
 
-See [SKILL.md](../SKILL.md) for the complete execution rules. The method was inspired by [humanizer](https://github.com/blader/humanizer), with Chinese translationese guidance informed by [yage.ai](https://yage.ai/share/ai-chinese-translationese-20260418.html). Licensed under the [MIT License](../LICENSE).
+Normal mode returns the revised text with a short editing note. Embedded mode returns only the final text. File mode edits authorized prose while preserving code blocks, frontmatter, commands, identifiers, paths, link targets, and data.
+
+qu-ai-wei handles same-language revision of existing prose. Translation, writing from scratch, typo-only proofreading, authorship claims, and model identification are separate jobs. Facts, opinions, experiences, and professional judgments in the result come from the source or material the user has authorized.
+
+Replace credentials with `[REDACTED]` before sharing text. For school, journal, platform, or workplace AI rules, follow the applicable disclosure and compliance policy.
+
+## Method and license
+
+The editing core draws on [Wikipedia's descriptive catalogue](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), [Humanizer](https://github.com/blader/humanizer), [Humanizer-zh](https://github.com/op7418/Humanizer-zh), [Sepia](https://github.com/Nanako0129/sepia), [stop-slop](https://github.com/hardikpandya/stop-slop), and [claudish-to-english](https://github.com/gvzdv/claudish-to-english). A rule applies when the current text contains matching evidence.
+
+See [SKILL.md](../SKILL.md) for the execution rules. Licensed under the [MIT License](../LICENSE).

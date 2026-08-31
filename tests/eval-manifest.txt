@@ -292,3 +292,103 @@ require_final_regex=(发布机制已经成熟|方案正确)
 require_final_fixed=持续释放平台化协作的长期价值
 forbid_final_regex=(不只是|并非).*(而是|而在于)
 forbid_final_regex=既是.*也是.*更是
+
+[17]
+fixture=tests/fixtures/17-english-same-language.md
+file=17-output.md
+mode=embedded
+request=Use qu-ai-wei to rewrite this in natural English. Preserve every fact and return only the final text.
+require_output_fixed=Atlas
+require_output_fixed=version 2.4
+require_output_fixed=May 6
+require_output_fixed=12 services
+require_output_regex=(7|seven) incidents
+forbid_output_fixed=【门检】
+forbid_output_regex=rapidly evolving|important to note|not merely.*but|transformative milestone|operational excellence|, (successfully )?(migrating|resolving)
+
+[18]
+fixture=tests/fixtures/18-traditional-chinese.md
+file=18-output.md
+mode=embedded
+request=請用 qu-ai-wei 改得自然，保留繁體中文與全部事實，只輸出終稿。
+require_output_fixed=團隊
+require_output_fixed=6 月 3 日
+require_output_fixed=2.1.0
+require_output_fixed=9
+forbid_output_fixed=【門檢】
+forbid_output_regex=值得一提|不僅.*更|重要里程碑|賦能
+
+[19]
+fixture=tests/fixtures/19-spanish-same-language.md
+file=19-output.md
+mode=embedded
+request=Usa qu-ai-wei para que este texto suene natural en español. Conserva todos los hechos y devuelve solo el texto final.
+require_output_fixed=versión 3.2
+require_output_fixed=12 de mayo
+require_output_fixed=11 errores
+forbid_output_fixed=【门检】
+forbid_output_regex=cabe destacar|no solo.*sino|hito transformador|experiencia fluida
+
+[20]
+fixture=tests/fixtures/20-mixed-language-pov-markup.md
+file=20-output.md
+mode=embedded
+request=Use qu-ai-wei to rewrite the prose naturally. Keep the English and Chinese sections in their original languages, preserve speaker roles and protected markup, and return only the final text.
+require_output_fixed=July 8
+require_output_fixed=`deploy --dry-run`
+require_output_fixed=`/srv/iris`
+require_output_fixed=“I own the rollback decision; you own the production approval.”
+require_output_fixed=[runbook](https://example.com/runbook?q=dry-run)
+forbid_output_regex=important to note|not merely.*fundamentally|more than (a )?procedural|wasn.?t just (a )?procedural
+
+[21]
+fixture=tests/fixtures/21-narrative-structure.md
+file=21-output.md
+mode=embedded
+request=请用 qu-ai-wei 重写这段叙事，只调整现有结构和语言。保留全部人物、事件、时间、引语，以及结局中的事实和主题判断；结尾的对举、抽象再命名和环境映照属于可编辑表达。本次没有比喻许可。只输出终稿。
+require_output_fixed=林岚
+require_output_fixed=周五傍晚
+require_output_fixed=三年前
+require_output_fixed=钢琴
+require_output_fixed=寄存仓库
+require_output_fixed=“我没卖。我那时欠了钱，只能先把琴搬走。”
+require_output_fixed=雨
+forbid_output_regex=表面(上)?看|本质上|成长(不是.*而是|就?是)|世界(仿佛)?重新(为|向)她打开|与过去(的)?和解|学会(了)?接纳|这(便|就是)成长|并不(等于|意味着)
+
+[22]
+fixture=tests/fixtures/22-technical-writing.md
+file=22-output.md
+mode=embedded
+request=请用 qu-ai-wei 的技术写作路径重写。使用标准术语和完整句子，保留全部数字、结论强度、表格信息和 Markdown，只输出终稿。
+require_output_fixed=8 个
+require_output_fixed=400 个问题
+require_output_fixed=0.030
+require_output_fixed=0.05
+require_output_fixed=32 个问题
+require_output_fixed=79 GPU·小时
+require_output_regex=(不同基座|基座来源)
+require_output_regex=多个任务的 Ray.*同一端口
+require_output_regex=置信区间与基线重叠
+require_output_regex=(几百次|数百次)采样|采样量为(几百|数百)次
+require_output_regex=(问题|现象).*(确认程度|结果|影响)|项目.*状态.*说明
+forbid_output_regex=血统|模型家族|吃掉一半|跟自己撞|认题目|好坏参差|赢得很干脆|(明显|明确|大幅)优势|只挪动|盖着基准线|天生需要|白捡|^## (第一环|中间两环)|(不是|而非).*信号|信号.*(不是|而非)
+
+[23]
+fixture=tests/fixtures/23-readme-dogfood.md
+file=23-output.md
+mode=embedded
+request=请用 qu-ai-wei 的严格模式重写这份旧 README，只输出终稿。以当前 SKILL.md 作为能力与边界的授权事实源；保留版本号、徽章、安装命令、链接、文件路径、兼容工具、示例中的原文与终稿。使用完整句子和直接表述。
+require_output_fixed=0.9.0
+require_output_fixed=assets/demo.gif
+require_output_fixed=npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
+require_output_fixed=SKILL.md
+require_output_fixed=references/examples.md
+require_output_fixed=3 个版本
+require_output_fixed=17 个线上问题
+require_output_fixed=Codex
+require_output_fixed=Claude Code
+require_output_fixed=MIT License
+require_output_fixed=同语言
+require_output_fixed=繁體中文
+forbid_output_fixed=【门检】
+forbid_output_fixed=【打磨报告】
