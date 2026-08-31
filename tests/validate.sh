@@ -22,10 +22,16 @@ required=(
   readmes/README.ja.md
   readmes/README.ko.md
   references/brand-voice.md
+  references/cross-language-core.md
   references/editing-boundaries.md
+  references/english-patterns.md
   references/examples.md
+  references/narrative-patterns.md
   references/platform-patterns.md
   references/pattern-catalog.md
+  references/professional-venues.md
+  references/strict-pass.md
+  references/technical-writing.md
   references/whitelists.md
   tests/README.md
   tests/blind-review/README.md
@@ -54,14 +60,23 @@ frontmatter_keys="$(awk '
 [ ! -e CONTEXT.md ] || { echo "CONTEXT.md duplicates runtime rules" >&2; exit 1; }
 grep -q '内嵌模式（embedded mode）' SKILL.md
 grep -q '只输出终稿正文' SKILL.md
-grep -q '否则一律使用普通模式' SKILL.md
-grep -q '敏感信息门检' SKILL.md
+grep -q '普通模式' SKILL.md
+grep -q '先过凭证门检' SKILL.md
 grep -q '结构重写' SKILL.md
-grep -q '局部换词' SKILL.md
-grep -q '信息账本' SKILL.md
+grep -q '先处理篇章与叙事结构' SKILL.md
+grep -q '事实清单' SKILL.md
 grep -q '真人文本（已授权改写）' SKILL.md
 grep -q '八个模式族' SKILL.md
-grep -q '全文信息账本' SKILL.md
+grep -q '说话人对应表' SKILL.md
+grep -q '默认在原文语言中改写' SKILL.md
+grep -q '繁體中文与其他语言' SKILL.md
+grep -q '副词或同功能修饰语、被动结构、破折号' SKILL.md
+grep -q 'references/technical-writing.md' SKILL.md
+grep -q '主语、谓语和宾语' references/strict-pass.md
+grep -q '比喻' references/technical-writing.md
+grep -q '原因未查明' references/technical-writing.md
+grep -q '同一端口' references/technical-writing.md
+grep -q 'README' tests/fixtures/23-readme-dogfood.md
 grep -q '旧编号迁移' references/pattern-catalog.md
 grep -q '表面分析与假揭示' references/pattern-catalog.md
 grep -q '三连、机械排比与身份升级' references/pattern-catalog.md
@@ -100,7 +115,7 @@ grep -q 'display_name: "去 AI 味"' agents/openai.yaml
 grep -q 'short_description: "' agents/openai.yaml
 grep -q 'default_prompt: ".*\$qu-ai-wei' agents/openai.yaml
 
-for reference in editing-boundaries examples platform-patterns pattern-catalog brand-voice whitelists; do
+for reference in brand-voice cross-language-core editing-boundaries english-patterns examples narrative-patterns platform-patterns pattern-catalog professional-venues strict-pass technical-writing whitelists; do
   grep -q "references/${reference}.md" SKILL.md || {
     echo "SKILL.md does not route to references/${reference}.md" >&2
     exit 1
@@ -130,7 +145,7 @@ grep -q 'bash tests/validate.sh' .github/workflows/validate.yml
 bash tests/check-triggers.sh
 
 case_count="$(grep -Ec '^\[[0-9][0-9]\]$' tests/eval-manifest.txt)"
-[ "$case_count" -eq 16 ] || { echo "expected 16 eval cases, found $case_count" >&2; exit 1; }
+[ "$case_count" -eq 23 ] || { echo "expected 23 eval cases, found $case_count" >&2; exit 1; }
 
 while IFS='=' read -r key value; do
   [ "$key" = "fixture" ] || continue

@@ -1,55 +1,55 @@
 # qu-ai-wei
 
-[简体中文](../README.md) | [English](./README.en.md) | 日本語 | [한국어](./README.ko.md) | [Español](./README.es.md)
+[简体中文](../README.md) · [English](./README.en.md) · 日本語 · [한국어](./README.ko.md) · [Español](./README.es.md)
 
-> ⚠️ **0.x 開発版：** ルール、分類、インターフェースは今後変更される可能性があります。[issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions)、PR からフィードバックをお寄せください。
+qu-ai-wei は、既存の文章を原文と同じ言語で書き直す skill です。文、段落、見出し、長文の構成を整えながら、事実、数字、引用、根拠の強さ、書式、書き手の声を保ちます。
 
-qu-ai-wei は、AI に多い文章上の症状を含む**簡体字中国語**を整える agent skill です。事実、意味、根拠の強さ、文章のかたさ、原文の声を保ちながら、文・段落・長文の構成まで組み直せます。症状は編集上の手がかりであり、著者判定には使いません。
+簡体字中国語と英語には専用の編集ルールがあります。繁体字中国語、日本語、スペイン語などは共通ルールを土台にし、その言語の文法、掲載場所、書き手のサンプルに合わせます。
 
-README は複数の言語で読めますが、skill が編集するのは簡体字中国語を本文の中心とする文章です。必要な製品名、技術用語、略語などは原文のまま保持します。
-
-## デモ
-
-![qu-ai-wei が簡体字中国語の下書きから空疎な定型句を除き、事実を残す例](../assets/demo.gif)
-
-この例では、一般的な導入、不要な強調表現、スローガンを削り、原文にある二つの事実を残しています。編集範囲は [`references/examples.md`](../references/examples.md) で確認できます。
+![qu-ai-wei が中国語の定型表現を整理し、事実を残す例](../assets/demo.gif)
 
 ## インストール
 
-Node.js と npm がある環境で、次を実行します。
+Node.js と npm が入っている環境で、次を実行します。
 
 ```bash
 npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
 ```
 
-外部の `skills` CLI が、コンピューターに入っている対応 AI コーディングツールを検出します。
+インストール後は新しいセッションを開くか、使用中のツールに合わせて skills を再読み込みしてください。
 
 ## 使い方
 
-インストール後、新しいセッションを開始するか、使用中のツールの手順に従って skills を再読み込みしてから、次のように依頼します。
-
 ```text
-/qu-ai-wei
+qu-ai-wei で次の日本語を自然に整えてください。事実はすべて残し、最終稿だけ返してください。
 
-[ここに簡体字中国語の文章を貼り付ける]
+[文章を貼り付ける]
 ```
 
-通常モードでは、編集の許可と保護対象を確認し、最終稿と短い推敲レポートを返します。書き直し・編集・推敲・AI らしさの除去、または本 skill での処理が明示されていれば、人が書いた文章も対象です。編集指示なしで文章だけが渡された場合に限り、人の声を保護して停止します。原文がすでに自然なら、無理に変更しません。
+翻訳も必要な場合は、翻訳を済ませてから訳文に qu-ai-wei を使います。
 
-## 最終稿だけ受け取る
+## 何を見るのか
 
-より大きなワークフローの一工程として使う場合は、embedded mode を指定します。
+最初に、完成稿でも保つ事実、主張、話者、引用、コード、パス、リンク、機械可読データを記録します。次に、各段落の役割を確認します。語彙や句読点はその後に編集します。
 
-```text
-qu-ai-wei で次の PR 説明を修正し、最終稿の本文だけを返してください。
+共通ルールは [`cross-language-core.md`](../references/cross-language-core.md) にあります。簡体字中国語と英語には専用レイヤーがあり、物語、リリースノート、PR、障害報告、技術記事には用途別の基準があります。
 
-[ここに簡体字中国語の文章を貼り付ける]
-```
+英語の `-ing`、冠詞、受動態、em dash は英語レイヤーで扱います。
 
-embedded mode でも内部の確認手順は変わりません。安全に修正できる場合だけ最終稿を返します。許可や情報が不足している場合は原文を返すか、質問または処理できない理由を示します。ファイルの書き込み、commit、公開、送信の権限は追加されません。
+## 厳密チェック
 
-## 対応範囲
+徹底した整理が求められた場合や、humanizer 自身の README、SKILL.md、紹介文を扱う場合は、副詞、受動表現、ダッシュ、演出的なリズムを一つずつ確認します。最終稿には、時間、程度、根拠、責任、文法、リズム、書き手の声のいずれかを担う要素を残します。
 
-翻訳やゼロからの執筆、原文にない意見や細部の追加、人が持つ固有の文体の書き換え、AI 利用規則の回避には使えません。
+## 出力と範囲
 
-実行規則の全文は [SKILL.md](../SKILL.md) を参照してください。本 skill は [humanizer](https://github.com/blader/humanizer) に着想を得ており、中国語の翻訳調に関する規則では [yage.ai](https://yage.ai/share/ai-chinese-translationese-20260418.html) を参考にしています。[MIT License](../LICENSE) で公開しています。
+通常モードは最終稿と短い編集メモを返します。embedded mode は最終稿だけを返します。file mode は許可された prose を編集し、コードブロック、frontmatter、コマンド、識別子、パス、リンク先、データを保ちます。
+
+qu-ai-wei の担当は、既存文章を同じ言語で整えることです。翻訳、ゼロからの執筆、誤字だけの校正、著者やモデルの判定は別の仕事として扱います。完成稿の事実、意見、経験、専門判断は、原文またはユーザーが許可した資料に基づきます。
+
+認証情報は共有前に `[REDACTED]` へ置き換えてください。学校、学術誌、プラットフォーム、勤務先では、それぞれの AI 利用・開示ルールに従います。
+
+## 方法とライセンス
+
+編集方法は [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)、[Humanizer](https://github.com/blader/humanizer)、[Humanizer-zh](https://github.com/op7418/Humanizer-zh)、[Sepia](https://github.com/Nanako0129/sepia)、[stop-slop](https://github.com/hardikpandya/stop-slop)、[claudish-to-english](https://github.com/gvzdv/claudish-to-english) を参照しています。各シグナルは、実際の文章で役割を確かめてから使います。
+
+実行規則は [SKILL.md](../SKILL.md) にあります。[MIT License](../LICENSE) で公開しています。

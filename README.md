@@ -2,65 +2,18 @@
 
 [![Version](https://img.shields.io/badge/version-0.9.0-blue.svg)](https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/v0.9.0)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-[![Language](https://img.shields.io/badge/lang-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red.svg)](#)
+[![Agent Skill](https://img.shields.io/badge/Agent_Skill-multilingual-red.svg)](./SKILL.md)
 [![GitHub stars](https://img.shields.io/github/stars/LifelongLazyLearner/qu-ai-wei?style=social)](https://github.com/LifelongLazyLearner/qu-ai-wei/stargazers)
 
-**把生硬、套路化的简体中文改得自然一点，同时保留事实、判断、正式程度和原文声口。**
+qu-ai-wei 按原语言重写已有文字。它可以调整句子、段落、标题和长文顺序，同时保留事实、数字、引语、证据强度、格式和作者声口。
 
-qu-ai-wei 是一个简体中文改写 skill。它会重组句子、段落和长文的信息结构，清理套话、机械结构、翻译腔和过度工整的表达；不会替作者编观点、经历或细节，也不会把技术文档、公文和学术文字统一改成聊天口吻。
+简体中文和英语有各自的细查规则。繁體中文、西班牙语、日语等语言使用共同编辑内核，再按该语言、使用场景和作者样本校准。
 
-[看效果](#看效果) · [常见模式](#常见的中文-ai-味) · [30 秒上手](#30-秒上手) · [怎么工作](#怎么工作) · [使用边界](#使用边界)
+[English](./readmes/README.en.md) · [日本語](./readmes/README.ja.md) · [한국어](./readmes/README.ko.md) · [Español](./readmes/README.es.md)
 
-语言：简体中文 | [English](./readmes/README.en.md) | [日本語](./readmes/README.ja.md) | [한국어](./readmes/README.ko.md) | [Español](./readmes/README.es.md)
+![qu-ai-wei 把套话较多的中文改成保留事实的自然表达](./assets/demo.gif)
 
-## 看效果
-
-![qu-ai-wei 把套话较多的简体中文改成保留事实的自然表达](./assets/demo.gif)
-
-### 删掉空话，数字不能跟着丢
-
-**原文：** 在快速变化的时代背景下，团队围绕提质增效开展了系统化实践。值得一提的是，本季度发布了 3 个版本，修复了 17 个线上问题，进一步赋能了组织协同。
-
-**终稿：** 团队本季度围绕提质增效开展了系统化实践，发布 3 个版本，修复了 17 个线上问题。
-
-这里删掉了没有增加信息的背景、强调和口号，同时保留「系统化实践」这个原有判断，也没有补写原文未说明的措施或效果。更多边界案例见 [`references/examples.md`](./references/examples.md)。
-
-### 技术文字不为“口语化”降格
-
-**原文：** 在长上下文推理中，latency 会随 context window 扩展而变化，因此不能只用单一指标判断系统性能。
-
-**终稿：** 长上下文推理的 latency 会随 context window 扩展而变化，不能只用单一指标判断系统性能。
-
-技术词、因果关系和正式程度保持不变，只删没有作用的引入结构。
-
-### 真人文字不乱改
-
-**原文：** 我到楼下才想起来钥匙还在桌上。站了两秒，又觉得有点好笑——这周已经第二次了。
-
-这类文字有具体经历、自嘲和自然节奏。只贴出文字、没有提出编辑要求时，qu-ai-wei 会停手；明确要求改写后，它可以调整结构，但仍会保留这些个人声口。
-
-更多边界案例见 [`references/examples.md`](./references/examples.md)。
-
-## 常见的中文 AI 味
-
-下面是最容易被读者认出的 10 类结构。它们是编辑线索，不用于鉴定作者，也不是违禁词：单独出现一次通常不算问题；只有反复出现、脱离事实或让句子空转时才处理。
-
-| 常见结构 | 什么时候值得改 | 什么时候要保留 |
-|---|---|---|
-| 随着……发展／在……背景下 | 开头只负责营造宏大感，删掉不影响信息 | 背景本身解释后文条件或时间 |
-| 值得一提／不可否认 | 只强调，没有新增事实 | 确实承担转折、限定或作者判断 |
-| 不是 X，而是 Y | 两端抽象、对称或反复出现，只把概念换个名字 | 两端确为不同动作时保留事实区别，但仍可改写句式 |
-| 不仅 X，更 Y | 两端都在拔高同一件事 | 两端提供不同信息，确有递进关系 |
-| 首先／其次／最后 | 个人叙述被硬拆成整齐三点 | 操作步骤、责任分工或答题结构 |
-| 赋能／助力／打造／闭环 | 短段密集出现，却没有谁做了什么 | 行业固定用语或原文有明确对象 |
-| 通过……的方式／由于……的原因 | 词更多，信息没有增加 | 删除后会改变条件、原因或正式程度 |
-| 然而／此外／因此 | 段段用连接词，但句间没有对应关系 | 因果、转折或补充关系真实存在 |
-| 重复代词、被字句、层层定语 | 主干被压住，像逐词翻译 | 被动能明确受事或责任，定语属于术语 |
-| 全段同句长、同结构 | 每句都像从同一模板复制 | 公文、条款、步骤需要平行结构 |
-
-完整的八个模式族见 [`references/pattern-catalog.md`](./references/pattern-catalog.md)；保护条件见 [`references/editing-boundaries.md`](./references/editing-boundaries.md)。
-
-## 30 秒上手
+## 安装
 
 电脑上已有 Node.js 和 npm 时，运行：
 
@@ -68,57 +21,76 @@ qu-ai-wei 是一个简体中文改写 skill。它会重组句子、段落和长�
 npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei
 ```
 
-`skills` 会自动检测本机支持的 AI 编程工具。安装后，新建会话或按工具要求重新加载 skills，然后直接说：
+安装后新建会话，或按所用工具的方式重新加载 skills。
+
+## 直接用
 
 ```text
-帮我去 AI 味：
+帮我去 AI 味，只输出终稿：
 
-[粘贴简体中文]
+[粘贴文字]
 ```
 
-## 怎么工作
-
-qu-ai-wei 不按词表机械替换。每次处理都会按同一顺序检查：
-
-1. 先检查疑似凭证、编辑授权和目标用途；用途会改变成稿却不明确时先提问。
-2. 锁住数字、人物、时间、术语、引用、判断和责任关系，不允许改写后漂移。
-3. 按目标语体扫描八个模式族，处理空话、机械对称、翻译腔、推论跳跃和格式残留。
-4. 重新安排事实、解释、例子和结论的顺序；长文可以拆并段落、调整标题和章节。
-5. 回读终稿，检查事实、因果、证据强度、引用绑定和原文声口是否保住。
-
-完整执行规则见 [`SKILL.md`](./SKILL.md)，短案例见 [`references/examples.md`](./references/examples.md)。
-
-## 只要终稿
-
-默认模式会给出门检、终稿和简短打磨报告；存在实质逻辑风险时另列需作者确认。如果 qu-ai-wei 只是工作流中的一步，可以要求它只返回终稿正文：
+英语也用同一个 skill：
 
 ```text
-用 qu-ai-wei 改写下面的 PR 描述，只输出终稿正文：
+Use qu-ai-wei to humanize this in English. Keep every fact and return only the final text:
 
-[粘贴简体中文]
+[paste text]
 ```
 
-只输出终稿不会放宽事实和语体约束，也不会获得写文件、commit、发布或发送内容的权限。遇到真人文本或信息不足时，它仍会停手或提问。
+如果任务还包括翻译，请先完成翻译，再用 qu-ai-wei 处理译文。
 
-## 支持的工具
+## 示例
 
-qu-ai-wei 使用开放的 Agent Skills 格式。Codex、Claude Code、Kimi Code CLI、Cursor 和 OpenCode 等工具可以直接加载同一份 `SKILL.md` 和 `references/`；`agents/openai.yaml` 只为 Codex / ChatGPT 提供展示名称、简介和默认提示词。
+中文原文：
 
-需要明确安装目标时，可以运行：
+> 在快速变化的时代背景下，值得一提的是，本季度团队发布了 3 个版本，修复了 17 个线上问题，进一步赋能了组织协同。
 
-```bash
-npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a claude-code -a kimi-code-cli
-```
+终稿：
 
-## 使用边界
+> 团队本季度发布了 3 个版本，修复了 17 个线上问题。
 
-- 只处理简体中文，不处理繁體中文。
-- 不替用户翻译、从零写文章或补写原文没有的观点与经历。
-- 不协助绕过学校、期刊或公司的 AI 使用规定。
-- 不要粘贴密码、API key 或其他凭证；检测到疑似凭证时，skill 会停止并要求先脱敏。
+英语原文：
 
-> **0.x 开发版（当前 [v0.9.0](https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/v0.9.0)）：** qu-ai-wei 仍在迭代，规则、分类、调用方式和输出格式可能变动。最新发布版本见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)；欢迎提交 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) 或 PR。
+> It is important to note that the migration of 14 services was successfully completed by the platform team—ultimately resulting in two incidents being resolved.
 
-## 来源与许可
+终稿：
 
-方法受 [humanizer](https://github.com/blader/humanizer) 启发，中文翻译腔规则参考 [yage.ai](https://yage.ai/share/ai-chinese-translationese-20260418.html)。本项目采用 [MIT License](./LICENSE)。
+> The platform team migrated 14 services and resolved two incidents.
+
+中文终稿保留季度、版本数和问题数。英文终稿保留服务数量、事故数量和平台团队的责任。技术文、合同和学术文字沿用各自的正式语体。
+
+## 编辑顺序
+
+qu-ai-wei 先记录事实、论证关系、说话人和受保护片段，再确认每段承担的职责。确定结构后，它才处理连接词、抽象词、副词、被动和标点。
+
+qu-ai-wei 会在陈述句中写清必要的行动者、动作、对象和条件，并为及物动词保留宾语。目标语言允许省略主语时，指代仍需明确。技术文本进一步使用标准术语、中性表头和直接机制描述。
+
+[`cross-language-core.md`](./references/cross-language-core.md) 收录共同规则。简体中文文本同时使用 [`pattern-catalog.md`](./references/pattern-catalog.md)，英语文本同时使用 [`english-patterns.md`](./references/english-patterns.md)。故事使用 [`narrative-patterns.md`](./references/narrative-patterns.md)。发布说明、PR、复盘和工单使用 [`professional-venues.md`](./references/professional-venues.md)。模型、数据、工程和实验文本使用 [`technical-writing.md`](./references/technical-writing.md)。
+
+语言专层处理各自的语法习惯。英语层检查 `-ing` 尾部结构、冠词和 em dash，中文规则处理翻译腔。各语言共同检查信息密度、无证据拔高、篇章复述、说话人漂移、引用错位和场域失配。
+
+## 严格清理
+
+用户要求彻底清理，或文本本身是 humanizer 的 README、SKILL.md、介绍页时，qu-ai-wei 会逐个检查副词、被动、破折号和表演性节奏。
+
+保留项需要承担明确作用，例如时间、程度、证据、责任、语法或作者节奏。内容和语法决定保留数量。[`strict-pass.md`](./references/strict-pass.md) 说明具体检查方法。
+
+## 交付方式
+
+普通模式返回终稿和简短打磨报告。用户可以在内嵌流程中要求“只输出终稿”。文件模式修改用户指定的 prose，并保留代码块、frontmatter、命令、路径、链接目标和机器可读数据。
+
+文本已经自然时，原文就是终稿。用户只提供正文时，qu-ai-wei 会保留原文并询问是否改写。
+
+## 职责
+
+qu-ai-wei 负责已有文字的同语言改写。翻译、从零写作、纯校对、作者鉴定和模型识别属于独立任务。终稿使用原文或用户授权材料中的事实、观点、经历和专业判断。
+
+用户分享文本前，应把凭证替换为 `[REDACTED]`。学校、期刊、平台和机构各自的披露与合规要求决定适用规则。
+
+## 方法与许可
+
+共同内核参考 [Wikipedia 的描述性目录](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)、[Humanizer](https://github.com/blader/humanizer)、[Humanizer-zh](https://github.com/op7418/Humanizer-zh)、[Sepia](https://github.com/Nanako0129/sepia)、[stop-slop](https://github.com/hardikpandya/stop-slop) 和 [claudish-to-english](https://github.com/gvzdv/claudish-to-english)。qu-ai-wei 会在当前文本中核对每条规则的证据。来源中的绝对禁令和单语言词表提供候选信号。
+
+项目采用 [MIT License](./LICENSE)。[`SKILL.md`](./SKILL.md) 收录完整执行规则。

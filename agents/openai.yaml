@@ -1,4 +1,4 @@
 interface:
   display_name: "去 AI 味"
-  short_description: "重写简体中文的 AI 高频写作症状，保留事实、逻辑和声口"
-  default_prompt: "Use $qu-ai-wei to rewrite this Simplified Chinese text naturally, including its sentence and article structure, while preserving facts, evidence strength, register, and voice."
+  short_description: "按原语言重写文字，保留事实、逻辑、语体和作者声口"
+  default_prompt: "Use $qu-ai-wei to rewrite this text in the same language. Preserve every fact, claim, speaker role, formatting detail, and the writer's voice."
