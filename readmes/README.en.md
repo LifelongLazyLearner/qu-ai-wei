@@ -2,8 +2,6 @@
 
 [简体中文](../README.md) · English · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Español](./README.es.md)
 
-**Revise existing prose in the same language while preserving facts, logic, register, and voice.**
-
 qu-ai-wei rewrites existing prose in the same language. It can reshape sentences, paragraphs, headings, and long-form structure while keeping the facts, numbers, quotations, strength of evidence, formatting, and the writer's voice.
 
 Simplified Chinese and English have dedicated editing layers. Traditional Chinese, Spanish, Japanese, and other languages use a shared cross-language core, then follow the grammar, venue, and writer samples available for that language.
@@ -28,7 +26,7 @@ Use qu-ai-wei to humanize this in English. Keep every fact and return only the f
 [paste text]
 ```
 
-The source language stays in place by default. For a translated piece, translate first and run qu-ai-wei on the translation.
+For a translated piece, translate first and run qu-ai-wei on the translation.
 
 ## What it pays attention to
 
@@ -36,7 +34,7 @@ The skill first records the facts, claims, speaker roles, quotations, code, path
 
 The shared rules live in [`cross-language-core.md`](../references/cross-language-core.md). English adds its own checks for inflated verb phrases, trailing participles, hidden actors, nominalization, vocabulary clusters, hedging, and typography in [`english-patterns.md`](../references/english-patterns.md). Narrative and professional writing use separate venue guides.
 
-This separation keeps English habits in English. An `-ing` phrase, article, passive construction, or em dash does not become a universal rule for every language.
+English-specific checks for `-ing` phrases, articles, passive constructions, and em dashes stay in the English layer.
 
 ## Strict pass
 
@@ -52,6 +50,6 @@ Replace credentials with `[REDACTED]` before sharing text. For school, journal, 
 
 ## Method and license
 
-The editing core draws on [Wikipedia's descriptive catalogue](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), [Humanizer](https://github.com/blader/humanizer), [Humanizer-zh](https://github.com/op7418/Humanizer-zh), [Sepia](https://github.com/Nanako0129/sepia), [stop-slop](https://github.com/hardikpandya/stop-slop), and [claudish-to-english](https://github.com/gvzdv/claudish-to-english). A rule applies when the current text contains matching evidence.
+The editing core uses [Wikipedia's descriptive catalogue](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), [Humanizer](https://github.com/blader/humanizer), [Humanizer-zh](https://github.com/op7418/Humanizer-zh), [Sepia](https://github.com/Nanako0129/sepia), [stop-slop](https://github.com/hardikpandya/stop-slop), and [claudish-to-english](https://github.com/gvzdv/claudish-to-english). A rule applies when the current text contains matching evidence.
 
-See [SKILL.md](../SKILL.md) for the execution rules. Licensed under the [MIT License](../LICENSE).
+See [SKILL.md](../SKILL.md) for the execution rules. The project uses the [MIT License](../LICENSE).

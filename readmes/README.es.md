@@ -2,8 +2,6 @@
 
 [简体中文](../README.md) · [English](./README.en.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · Español
 
-**Reescribe un texto en el mismo idioma y conserva los hechos, la lógica, el registro y la voz.**
-
 qu-ai-wei reescribe un texto en su idioma original. Puede reorganizar frases, párrafos, títulos y textos largos, pero conserva los hechos, cifras, citas, grado de certeza, formato y voz del autor.
 
 El chino simplificado y el inglés tienen reglas propias. El chino tradicional, el español, el japonés y los demás idiomas parten de un núcleo común y se ajustan después a la gramática, el contexto de publicación y las muestras del autor.
@@ -28,15 +26,15 @@ Usa qu-ai-wei para que este texto suene natural en español. Conserva todos los 
 [pega aquí el texto]
 ```
 
-El idioma del original se mantiene por defecto. Si el trabajo incluye una traducción, traduce primero y usa qu-ai-wei sobre el texto traducido.
+Si el trabajo incluye una traducción, traduce primero y usa qu-ai-wei sobre el texto traducido.
 
 ## En qué se fija
 
-Primero registra los hechos, las afirmaciones, las personas gramaticales, las citas, el código, las rutas, los enlaces y los datos legibles por máquina que debe conservar. Luego comprueba qué función cumple cada párrafo. Las palabras y la puntuación llegan al final.
+Primero registra los hechos, las afirmaciones, las personas gramaticales, las citas, el código, las rutas, los enlaces y los datos legibles por máquina que debe conservar. Luego comprueba qué función cumple cada párrafo. La revisión deja el vocabulario y la puntuación para el final.
 
 Las reglas compartidas están en [`cross-language-core.md`](../references/cross-language-core.md). El inglés y el chino simplificado añaden sus propias capas. La narrativa, las notas de versión, los PR, las incidencias y los informes técnicos siguen guías específicas para su contexto.
 
-Así, una costumbre del inglés no se convierte en una prohibición universal para todos los idiomas.
+Las reglas sobre `-ing`, artículos, pasivas y em dashes permanecen en la capa de inglés.
 
 ## Revisión estricta
 
@@ -52,6 +50,6 @@ Sustituye las credenciales por `[REDACTED]` antes de compartir el texto. En cent
 
 ## Método y licencia
 
-El método toma ideas de [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), [Humanizer](https://github.com/blader/humanizer), [Humanizer-zh](https://github.com/op7418/Humanizer-zh), [Sepia](https://github.com/Nanako0129/sepia), [stop-slop](https://github.com/hardikpandya/stop-slop) y [claudish-to-english](https://github.com/gvzdv/claudish-to-english). Cada señal se comprueba en el texto concreto antes de editar.
+El método usa [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), [Humanizer](https://github.com/blader/humanizer), [Humanizer-zh](https://github.com/op7418/Humanizer-zh), [Sepia](https://github.com/Nanako0129/sepia), [stop-slop](https://github.com/hardikpandya/stop-slop) y [claudish-to-english](https://github.com/gvzdv/claudish-to-english). qu-ai-wei comprueba cada señal en el texto concreto antes de editar.
 
-Las reglas completas están en [SKILL.md](../SKILL.md). Publicado con [licencia MIT](../LICENSE).
+Las reglas completas están en [SKILL.md](../SKILL.md). El proyecto usa la [licencia MIT](../LICENSE).
