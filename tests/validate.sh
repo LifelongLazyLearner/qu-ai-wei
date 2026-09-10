@@ -130,7 +130,7 @@ grep -q 'bash tests/validate.sh' .github/workflows/validate.yml
 bash tests/check-triggers.sh
 
 case_count="$(grep -Ec '^\[[0-9][0-9]\]$' tests/eval-manifest.txt)"
-[ "$case_count" -eq 16 ] || { echo "expected 16 eval cases, found $case_count" >&2; exit 1; }
+[ "$case_count" -eq 20 ] || { echo "expected 20 eval cases, found $case_count" >&2; exit 1; }
 
 while IFS='=' read -r key value; do
   [ "$key" = "fixture" ] || continue
