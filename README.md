@@ -1,6 +1,6 @@
 # 去 AI 味（qu-ai-wei）
 
-[![Version](https://img.shields.io/badge/version-0.9.0-blue.svg)](https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/v0.9.0)
+[![Version](https://img.shields.io/badge/version-0.9.1-blue.svg)](https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/v0.9.1)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![Language](https://img.shields.io/badge/lang-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red.svg)](#)
 [![GitHub stars](https://img.shields.io/github/stars/LifelongLazyLearner/qu-ai-wei?style=social)](https://github.com/LifelongLazyLearner/qu-ai-wei/stargazers)
@@ -117,7 +117,7 @@ npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a clau
 - 不协助绕过学校、期刊或公司的 AI 使用规定。
 - 不要粘贴密码、API key 或其他凭证；检测到疑似凭证时，skill 会停止并要求先脱敏。
 
-> **0.x 开发版（当前 [v0.9.0](https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/v0.9.0)）：** qu-ai-wei 仍在迭代，规则、分类、调用方式和输出格式可能变动。最新发布版本见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)；欢迎提交 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) 或 PR。
+> **0.x 开发版（当前 [v0.9.1](https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/v0.9.1)）：** qu-ai-wei 仍在迭代，规则、分类、调用方式和输出格式可能变动。最新发布版本见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)；欢迎提交 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) 或 PR。
 
 ## 来源与许可
 
