@@ -59,7 +59,8 @@ grep -q '敏感信息门检' SKILL.md
 grep -q '结构重写' SKILL.md
 grep -q '局部换词' SKILL.md
 grep -q '信息账本' SKILL.md
-grep -q '真人文本（已授权改写）' SKILL.md
+grep -q '已有可辨识声口（已授权编辑）' SKILL.md
+grep -q '无明确编辑请求' SKILL.md
 grep -q '八个模式族' SKILL.md
 grep -q '全文信息账本' SKILL.md
 grep -q '旧编号迁移' references/pattern-catalog.md

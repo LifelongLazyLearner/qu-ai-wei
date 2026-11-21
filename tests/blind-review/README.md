@@ -7,11 +7,11 @@
 在相同模型、相同设置、彼此隔离的干净会话里，分别运行 `tests/eval-manifest.txt` 中除敏感信息样本 07 外的全部案例。把输出保存为：
 
 ```text
-<baseline-dir>/01-output.md ... 16-output.md（不含 07）
-<candidate-dir>/01-output.md ... 16-output.md（不含 07）
+<baseline-dir>/01-output.md ... 20-output.md（不含 07）
+<candidate-dir>/01-output.md ... 20-output.md（不含 07）
 ```
 
-安全样本 07 用 `tests/check-runs.sh` 做通过 / 失败检查，不进入文风盲评。
+案例清单从 manifest 读取。案例 04 和 15 只评价是否正确提问或停手，单独记录，不计入成稿文风评分。敏感信息样本 07 用 `tests/check-runs.sh` 做通过 / 失败检查，不进入文风盲评。
 
 ## 生成盲评包
 
