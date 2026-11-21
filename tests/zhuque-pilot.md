@@ -25,3 +25,31 @@
 首轮用于发现问题。如果现版没有稳定优势，下轮优先试四步短版。确认用途，锁定原意和引文，做最小有效改写，再核对成稿。若缺少能支撑关键判断的事实，允许向作者追问一个具体问题。写作样本由作者选填。把收集新材料的效果留到独立试验，避免混进首轮提示词对比。
 
 根据首轮结果调整规则后，另用一批未参与调规则的稿件复测。结论注明体裁、检测入口和日期。
+
+## 复现三组小样
+
+按同一批 01–03 虚构原稿比较短提示词、[#53 修正版](https://github.com/LifelongLazyLearner/qu-ai-wei/pull/53)和 [#54 四步版](https://github.com/LifelongLazyLearner/qu-ai-wei/pull/54)。以下命令固定两份 skill 的内容及其参考文件，并为每组单独准备会话目录。生成包的目录需要是仓库之外的新目录。
+
+```bash
+git fetch origin refs/pull/53/head:refs/remotes/origin/eval-pr53 refs/pull/54/head:refs/remotes/origin/eval-pr54
+out="$(mktemp -d)/zhuque"
+python3 tests/prepare-zhuque.py \
+  --baseline f3c235ee89395457c73d1c8cd43ed6a3ab0d728a \
+  --candidate e5a9bd22624fb3ddd6b70aababbd80239578f4f1 \
+  --out-dir "$out"
+```
+
+选定一个模型，在 9 个独立会话中各运行一次。会话使用对应目录为工作目录，输入为其中的 `request.txt`。若使用 Codex CLI，可用以下方式运行，模型名称按实际账户可用性填写，记录模型及运行设置。
+
+```bash
+model=gpt-6.1-sol
+mkdir "$out/outputs"
+for session in "$out"/sessions/*; do
+  codex exec --ephemeral --skip-git-repo-check -s read-only -m "$model" \
+    -C "$session" -o "$out/outputs/${session##*/}.md" - < "$session/request.txt" || break
+done
+```
+
+三个原稿、九份改写和一份真人对照共 13 次送检。真人对照沿用[小样说明](./zhuque-smoke.md)，它只用来跑通流程。保存原始判定到 `results.csv`，同时保留 `manifest.json` 和实际提交的正文。
+
+初次提交前逐篇核对关键关系。01 的天气与流程变化无法区分各自影响。02 只试过两次，耐久性未知。03 书目也更换过，回复增加不能全归于问句。记录每组保义失败和不可交付的篇数。再让读者盲看正文，判断模板感或读起来是否明显退步。朱雀胜平负按预先规定的判定次序计算，并列出无法比较的稿件及原因。三篇小样只验证流程，采用候选版前还需要独立的新稿和读者评价。
