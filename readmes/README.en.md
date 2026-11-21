@@ -34,7 +34,7 @@ After installation, start a new session or reload skills as required by your too
 [paste Simplified Chinese text]
 ```
 
-By default, qu-ai-wei checks editing authority and protected content, then returns a final version with a short polishing report. An explicit request to rewrite, edit, polish, humanize, or use this skill authorizes editing even when the text is human-written. It stops for human voice only when text is supplied without an editing instruction, and it does not force changes when the source already reads naturally.
+By default, qu-ai-wei checks editing authority and protected content, then returns a final version with a short polishing report. An explicit request to rewrite, edit, polish, humanize, or use this skill authorizes editing even when the text is human-written. It leaves the text alone when the request does not authorize editing. An authorized edit can still keep wording that already reads naturally.
 
 ## Final Text Only
 

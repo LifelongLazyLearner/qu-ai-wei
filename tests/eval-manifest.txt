@@ -27,7 +27,7 @@ fixture=tests/fixtures/02-human-stop.md
 file=02-output.md
 mode=normal
 request=请用 qu-ai-wei 处理这段文字。
-require_output_fixed=真人文本（已授权改写）
+require_output_fixed=已有可辨识声口（已授权编辑）
 require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
 require_final_fixed=前天晚上
 require_final_fixed=我妈
@@ -126,7 +126,7 @@ fixture=tests/fixtures/10-authorized-human-rewrite.md
 file=10-output.md
 mode=normal
 request=这是我自己写的，我明确授权你改写。请保留我的判断和细节，把反复的「不是……而是……」句式改得自然。
-require_output_fixed=真人文本（已授权改写）
+require_output_fixed=已有可辨识声口（已授权编辑）
 require_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
 require_final_fixed=周三
 require_final_fixed=公园
@@ -155,7 +155,7 @@ forbid_final_regex=(当我们谈论|真正谈论的是)
 forbid_final_regex=(表面(上)?(看)?|看似).*(背后|本质|其实)
 forbid_final_regex=既是.*也是.*更是
 forbid_final_regex=功能更新[^。！？]*流程优化[^。！？]*成熟
-forbid_final_regex=完成了功能更新。[^。！？]*体现了流程优化
+forbid_final_regex=(完成了|已完成)[^。！？]*功能更新
 forbid_final_regex=相比[^。！？]*更
 forbid_final_regex=(问题来了|答案(其实)?很简单)
 
@@ -238,8 +238,8 @@ fixture=tests/fixtures/02-human-stop.md
 file=15-output.md
 mode=normal
 request=以下文字仅供你阅读。
-require_output_fixed=真人文本（停手）
-forbid_output_regex=^#{2,6}[[:space:]]*终稿
+require_output_fixed=无明确编辑请求
+forbid_output_regex=^(#{2,6}[[:space:]]*)?终稿[[:space:]]*$
 forbid_output_fixed=【打磨报告】
 
 [16]

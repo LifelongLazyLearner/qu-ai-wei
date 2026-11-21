@@ -11,7 +11,8 @@ import re
 from pathlib import Path
 
 
-CASE_IDS = ("01", "02", "03", "04", "05", "06", "08", "09", "10", "11", "12", "13", "14", "15", "16")
+MANIFEST_PATH = Path(__file__).resolve().parents[1] / "eval-manifest.txt"
+EXCLUDED_CASE_IDS = {"07"}  # The credential fixture is not safe to include in a review packet.
 SECTION_END = re.compile(r"^(?:【(?:打磨报告|需作者确认|改动摘要)】|#{1,6}\s*(?:打磨报告|需作者确认|改动摘要|自审)\s*)$")
 CONFIRMATION_START = re.compile(r"^(?:【需作者确认】|#{1,6}\s*需作者确认\s*)$")
 REPORT_START = re.compile(r"^(?:【(?:打磨报告|改动摘要)】|#{1,6}\s*(?:打磨报告|改动摘要|自审)\s*)$")
@@ -81,9 +82,8 @@ def require_file(path: Path) -> str:
     return path.read_text(encoding="utf-8").strip()
 
 
-def build_packet(args: argparse.Namespace) -> None:
-    repo_root = Path(__file__).resolve().parents[2]
-    manifest = read_manifest(repo_root / "tests/eval-manifest.txt")
+def build_packet(args: argparse.Namespace, manifest: dict[str, dict[str, str]]) -> None:
+    repo_root = MANIFEST_PATH.parent.parent
     rng = random.Random(args.seed)
     out_dir = args.out_dir.resolve()
     if out_dir.exists() and any(out_dir.iterdir()):
@@ -96,10 +96,7 @@ def build_packet(args: argparse.Namespace) -> None:
         "不要查看同目录的 `answer-key.json`，直到所有评分完成。",
         "",
     ]
-    case_ids = tuple(args.cases) if args.cases else CASE_IDS
-    unknown_cases = sorted(set(case_ids) - set(CASE_IDS))
-    if unknown_cases:
-        raise SystemExit(f"unknown case ids: {', '.join(unknown_cases)}")
+    case_ids = args.cases
     candidate_a = set(rng.sample(case_ids, len(case_ids) // 2))
     key: dict[str, object] = {
         "seed": args.seed,
@@ -168,7 +165,7 @@ def build_packet(args: argparse.Namespace) -> None:
     print(f"wrote {out_dir / 'answer-key.json'}")
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(case_ids: tuple[str, ...]) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--baseline-dir", type=Path, required=True)
     parser.add_argument("--candidate-dir", type=Path, required=True)
@@ -178,9 +175,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--settings", required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=20260804)
-    parser.add_argument("--cases", nargs="+", choices=CASE_IDS)
+    parser.add_argument("--cases", nargs="+", choices=case_ids, default=case_ids)
     return parser.parse_args()
 
 
 if __name__ == "__main__":
-    build_packet(parse_args())
+    manifest = read_manifest(MANIFEST_PATH)
+    case_ids = tuple(case_id for case_id in manifest if case_id not in EXCLUDED_CASE_IDS)
+    build_packet(parse_args(case_ids), manifest)
