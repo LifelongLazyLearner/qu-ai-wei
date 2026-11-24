@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CASES = ("01", "02", "03")
+COHORTS = {"smoke": ("01", "02", "03"), "follow-up": ("05", "06")}
 REQUEST = (
     "把这篇简体中文创作者稿改得自然些，适合普通中文读者。"
     "保留原有事实、判断、证据强度和引用，不补造材料，不向作者索取新材料。成稿尽量保留约 400 至 550 个汉字，只输出终稿正文。"
@@ -32,11 +32,16 @@ def digest(content):
     return hashlib.sha256(content).hexdigest()
 
 
-def prepare(out, baseline, candidate):
+def prepare(out, baseline, candidate, cohort):
     raw = (ROOT / "tests/zhuque-smoke.md").read_text()
-    sources = dict(re.findall(r"^### (0[1-3])A 原稿\n\n(.*?)(?=^### )", raw, re.M | re.S))
-    if tuple(sources) != CASES:
-        raise ValueError("expected original drafts 01A, 02A and 03A in tests/zhuque-smoke.md")
+    available = dict(re.findall(
+        r"^### (0[12356])(?:A 原稿| 观点稿| 实用稿)\n\n(.*?)(?=^#{1,6} |\Z)",
+        raw, re.M | re.S,
+    ))
+    cases = COHORTS[cohort]
+    if missing := [case for case in cases if case not in available]:
+        raise ValueError(f"missing original drafts {', '.join(missing)} in tests/zhuque-smoke.md")
+    sources = {case: available[case] for case in cases}
     for case, content in sources.items():
         if len(re.findall(r"[\u3400-\u9fff]", content)) < 400:
             raise ValueError(f"original draft {case} needs at least 400 Han characters for the web pilot")
@@ -46,6 +51,7 @@ def prepare(out, baseline, candidate):
     out.mkdir(parents=True, exist_ok=False)
     (out / "originals").mkdir()
     manifest = {
+        "cohort": cohort,
         "versions": {
             variant: {"commit": commit, "sha256": {p: digest(b) for p, b in files.items()}}
             for variant, (commit, files) in versions.items()
@@ -77,10 +83,11 @@ def prepare(out, baseline, candidate):
     with (out / "results.csv").open("w", newline="", encoding="utf-8") as fp:
         writer = csv.writer(fp)
         writer.writerow(("case", "version", "fidelity", "reader_preference", "detector_result", "checked_at", "notes"))
-        for case in CASES:
+        for case in cases:
             for variant in ("original", "prompt", "baseline", "candidate"):
                 writer.writerow((case, variant, "", "", "", "", ""))
-        writer.writerow(("04", "human_control", "", "", "", "", "See tests/zhuque-smoke.md"))
+        if cohort == "smoke":
+            writer.writerow(("04", "human_control", "", "", "", "", "See tests/zhuque-smoke.md"))
 
 
 def main():
@@ -88,12 +95,13 @@ def main():
     parser.add_argument("--baseline", required=True, help="Git revision of the corrected skill")
     parser.add_argument("--candidate", required=True, help="Git revision of the four-step skill")
     parser.add_argument("--out-dir", required=True, type=Path, help="New directory outside the repository")
+    parser.add_argument("--cohort", choices=COHORTS, default="smoke", help="Drafts for the comparison")
     args = parser.parse_args()
     out = args.out_dir.resolve()
     if out.is_relative_to(ROOT):
         parser.error("use an output directory outside the repository to isolate model sessions")
     try:
-        prepare(out, args.baseline, args.candidate)
+        prepare(out, args.baseline, args.candidate, args.cohort)
     except (subprocess.CalledProcessError, FileExistsError, ValueError) as exc:
         parser.error(str(exc))
     print(out)
