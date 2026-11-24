@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CASES = ("01", "02", "03")
 REQUEST = (
     "把这篇简体中文创作者稿改得自然些，适合普通中文读者。"
-    "保留原有事实、判断、证据强度和引用，不补造材料，不向作者索取新材料。只输出终稿正文。"
+    "保留原有事实、判断、证据强度和引用，不补造材料，不向作者索取新材料。成稿尽量保留约 400 至 550 个汉字，只输出终稿正文。"
 )
 
 
@@ -37,6 +37,9 @@ def prepare(out, baseline, candidate):
     sources = dict(re.findall(r"^### (0[1-3])A 原稿\n\n(.*?)(?=^### )", raw, re.M | re.S))
     if tuple(sources) != CASES:
         raise ValueError("expected original drafts 01A, 02A and 03A in tests/zhuque-smoke.md")
+    for case, content in sources.items():
+        if len(re.findall(r"[\u3400-\u9fff]", content)) < 400:
+            raise ValueError(f"original draft {case} needs at least 400 Han characters for the web pilot")
     versions = {"baseline": snapshot(baseline), "candidate": snapshot(candidate)}
     if versions["baseline"][1] == versions["candidate"][1]:
         raise ValueError("the two skill bundles are identical")
