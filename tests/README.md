@@ -1,4 +1,4 @@
-# 回归检查
+# 回归与维护
 
 这套测试只保留会保护 skill 行为或安装约束的内容。静态检查可以自动运行；模型行为有随机性，必须用干净会话生成输出后再核对，不能把旧版本快照当成当前结果。
 
@@ -6,15 +6,31 @@
 
 ```bash
 bash tests/validate.sh
+# 无法访问 npm 时，运行其余检查
+bash tests/validate.sh --local
 ```
 
-它检查必需文件、参考文件路由、触发词锚点、二十个评测样本、版本与发布约束，以及 `skills` CLI 能否发现本 skill。CI 运行同一条命令。
+默认命令与 CI 一致，校验必需文件、参考文件路由、触发词锚点、评测案例和发布约束，并运行确定性测试。最后用固定版本的 Skills CLI 检查安装发现。`--local` 仅跳过 CLI 发现。
+
+## 从职责定位改动
+
+| 改动 | 入口 |
+|---|---|
+| 编辑权限、优先级、交付 | [SKILL.md](../SKILL.md) |
+| 模式定义、保护细则、平台和领域差异 | [references/](../references/) 下对应文件，读取条件见 SKILL.md |
+| 新增或修订评测案例 | [eval-manifest.txt](eval-manifest.txt) 中的对应编号和 [fixtures/](fixtures/) 中的原文 |
+| 捕获输出的断言与正文抽取 | [regression.py](skill_checks/regression.py)、[output.py](skill_checks/output.py) |
+| A/B 盲评的取材与报告 | [review.py](skill_checks/review.py)、[盲评说明](blind-review/README.md) |
+| 安装包、触发锚点与发布约束 | [package.py](skill_checks/package.py)、[.github/workflows/](../.github/workflows/) |
+| 朱雀对比材料与试跑记录 | [prepare-zhuque.py](prepare-zhuque.py)、[试跑说明](zhuque-pilot.md) |
+
+回归检查与盲评共用同一份案例加载逻辑。独立案例改动集中在该编号和原文。新增案例使用未占用的两位编号，现有编号继续用于历史输出。抽取或清单格式改动同时跑回归与盲评入口。
 
 ## 行为回归
 
 1. 新建一个不带本仓库讨论记录的干净会话。
 2. 按 `tests/eval-manifest.txt` 的 `request` 处理对应 `fixture`。
-3. 把二十份输出保存到本地 `tests/runs/<版本-模型>/`，文件名取清单中的 `file` 值。
+3. 把清单中的输出保存到本地 `tests/runs/<版本-模型>/`，文件名取清单中的 `file` 值。
 4. 运行：
 
 ```bash

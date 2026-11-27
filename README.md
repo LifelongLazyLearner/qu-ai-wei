@@ -119,6 +119,10 @@ npx skills add https://github.com/LifelongLazyLearner/qu-ai-wei -a codex -a clau
 
 > **0.x 开发版（当前 [v0.9.1](https://github.com/LifelongLazyLearner/qu-ai-wei/releases/tag/v0.9.1)）：** qu-ai-wei 仍在迭代，规则、分类、调用方式和输出格式可能变动。最新发布版本见 [Releases](https://github.com/LifelongLazyLearner/qu-ai-wei/releases)；欢迎提交 [issue](https://github.com/LifelongLazyLearner/qu-ai-wei/issues)、[discussion](https://github.com/LifelongLazyLearner/qu-ai-wei/discussions) 或 PR。
 
+## 参与维护
+
+开发入口、文件职责和本地验证命令见[回归与维护说明](./tests/README.md)。
+
 ## 来源与许可
 
 方法受 [humanizer](https://github.com/blader/humanizer) 启发，中文翻译腔规则参考 [yage.ai](https://yage.ai/share/ai-chinese-translationese-20260418.html)。本项目采用 [MIT License](./LICENSE)。

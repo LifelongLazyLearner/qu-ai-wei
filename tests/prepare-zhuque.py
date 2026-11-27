@@ -3,13 +3,13 @@
 
 import argparse
 import csv
-import hashlib
 import json
 import re
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+from skill_checks.common import ROOT, digest
+
 COHORTS = {"smoke": ("01", "02", "03"), "follow-up": ("05", "06")}
 REQUEST = (
     "把这篇简体中文创作者稿改得自然些，适合普通中文读者。"
@@ -26,10 +26,6 @@ def snapshot(ref):
     resources = git("ls-tree", "-rz", "--name-only", commit, "--", "references").decode().split("\0")
     paths = ["SKILL.md", *(p for p in resources if p.endswith(".md"))]
     return commit, {path: git("show", f"{commit}:{path}") for path in paths}
-
-
-def digest(content):
-    return hashlib.sha256(content).hexdigest()
 
 
 def prepare(out, baseline, candidate, cohort):
