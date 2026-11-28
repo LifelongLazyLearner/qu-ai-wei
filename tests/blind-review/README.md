@@ -26,7 +26,7 @@ python3 tests/blind-review/prepare.py \
   --out-dir tests/runs/blind-review
 ```
 
-脚本生成：
+评审包的两份文件一起写入目标目录，已有包会被保留。
 
 - `review.md`：交给评分人，只含原文和 A / B。
 - `answer-key.json`：尽量平衡的版本映射、skill 文件摘要及模型 / 设置记录，评分结束前不要打开。
